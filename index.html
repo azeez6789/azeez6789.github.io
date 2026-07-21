@@ -3,26 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hyper-Animated Interactive Experience</title>
+    <title>Hasindu Chanuka - Full Stack Developer Portfolio</title>
     <style>
         /* ==========================================================================
-           1. ROOT VARIABLES & RESET
+           1. CORE VARIABLES & THEME DEFINITIONS
            ========================================================================== */
         :root {
-            --bg-primary: #0a0a12;
-            --bg-secondary: #121225;
-            --bg-card: rgba(255, 255, 255, 0.03);
-            --accent-glow: #7928ca;
-            --accent-cyan: #00dfd8;
-            --accent-pink: #ff0080;
-            --accent-gold: #ff4d0d;
-            --text-main: #ffffff;
-            --text-muted: #a0a0c0;
-            --border-glow: rgba(121, 40, 202, 0.3);
-            --font-stack: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            --transition-fast: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            --transition-bounce: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --bg-primary: #f8f6fc;
+            --bg-secondary: #0d0b18;
+            --text-dark: #1e192a;
+            --text-muted: #625c70;
+            --purple-main: #8a2be2;
+            --purple-bright: #a142f5;
+            --purple-glow: rgba(138, 43, 226, 0.4);
+            --purple-soft: #f0e6ff;
+            --white: #ffffff;
+            --font-main: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-bounce: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         *, *::before, *::after {
@@ -33,22 +31,21 @@
 
         html {
             scroll-behavior: smooth;
-            overflow-x: hidden;
-            font-family: var(--font-stack);
+            font-family: var(--font-main);
             background-color: var(--bg-primary);
-            color: var(--text-main);
+            color: var(--text-dark);
+            overflow-x: hidden;
         }
 
         body {
             position: relative;
             min-height: 100vh;
-            cursor: default;
         }
 
         /* ==========================================================================
-           2. CUSTOM CURSOR ANIMATION
+           2. CUSTOM ANIMATED CURSOR
            ========================================================================== */
-        .cursor-dot, .cursor-outline {
+        .cursor-dot, .cursor-follower {
             pointer-events: none;
             position: fixed;
             top: 0;
@@ -56,210 +53,146 @@
             border-radius: 50%;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            transition: opacity 0.3s ease-in-out, transform 0.15s ease-out;
+            transition: opacity 0.3s ease;
         }
 
         .cursor-dot {
             width: 8px;
             height: 8px;
-            background-color: var(--accent-cyan);
-            box-shadow: 0 0 10px var(--accent-cyan);
+            background-color: var(--purple-main);
         }
 
-        .cursor-outline {
-            width: 36px;
-            height: 36px;
-            border: 2px solid var(--accent-pink);
-            animation: pulseCursor 2s infinite alternate;
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--purple-main);
+            transition: transform 0.15s ease-out, width 0.3s ease, height 0.3s ease;
+            animation: pulseGlow 2s infinite ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 10px var(--purple-glow); }
+            50% { box-shadow: 0 0 25px var(--purple-glow); }
         }
 
         /* ==========================================================================
-           3. BACKGROUND CANVAS & SVG ANIMATIONS
+           3. BACKGROUND ATMOSPHERE & CANVAS ANIMATIONS
            ========================================================================== */
-        #particle-canvas {
+        #interactive-bg-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
+            z-index: 0;
             pointer-events: none;
         }
 
-        .background-blobs {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
+        .ambient-cloud-container {
+            position: absolute;
+            inset: 0;
             overflow: hidden;
+            z-index: 1;
             pointer-events: none;
-            opacity: 0.6;
         }
 
-        .blob {
+        .ambient-cloud {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
-            animation-iteration-count: infinite;
-            animation-direction: alternate;
-            animation-timing-function: ease-in-out;
+            filter: blur(90px);
+            opacity: 0.55;
+            animation: floatCloud 20s infinite alternate ease-in-out;
         }
 
-        .blob-1 {
+        .cloud-1 {
             top: -10%;
-            left: -10%;
-            width: 50vw;
-            height: 50vw;
-            background: radial-gradient(circle, var(--accent-glow), transparent);
-            animation: floatBlob1 18s infinite;
+            left: 20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #c782ff 0%, #e0b0ff 50%, transparent 80%);
         }
 
-        .blob-2 {
-            bottom: -20%;
-            right: -10%;
-            width: 60vw;
-            height: 60vw;
-            background: radial-gradient(circle, var(--accent-pink), transparent);
-            animation: floatBlob2 22s infinite;
+        .cloud-2 {
+            bottom: 10%;
+            right: -5%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, #b15eff 0%, #f3d5ff 60%, transparent 80%);
+            animation-delay: -7s;
         }
 
-        .blob-3 {
+        .cloud-3 {
             top: 40%;
-            left: 30%;
-            width: 40vw;
-            height: 40vw;
-            background: radial-gradient(circle, var(--accent-cyan), transparent);
-            animation: floatBlob3 15s infinite;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #d291ff 0%, transparent 70%);
+            animation-delay: -12s;
+        }
+
+        @keyframes floatCloud {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            50% { transform: translate(60px, 40px) scale(1.15) rotate(180deg); }
+            100% { transform: translate(-40px, 80px) scale(0.9) rotate(360deg); }
         }
 
         /* ==========================================================================
-           4. KEYFRAME ANIMATIONS (OVER 20 UNIQUE ANIMATIONS)
-           ========================================================================== */
-        @keyframes pulseCursor {
-            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
-            100% { transform: translate(-50%, -50%) scale(1.4); opacity: 0.3; }
-        }
-
-        @keyframes floatBlob1 {
-            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-            50% { transform: translate(150px, 100px) rotate(180deg) scale(1.2); }
-            100% { transform: translate(-50px, 200px) rotate(360deg) scale(0.9); }
-        }
-
-        @keyframes floatBlob2 {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(-120px, -150px) scale(1.3); }
-            100% { transform: translate(80px, -80px) scale(0.8); }
-        }
-
-        @keyframes floatBlob3 {
-            0% { transform: translate(0, 0) scale(0.8); }
-            50% { transform: translate(100px, -100px) scale(1.1); }
-            100% { transform: translate(-100px, 100px) scale(0.8); }
-        }
-
-        @keyframes textGradientStream {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes heroFloatingCard {
-            0% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
-            50% { transform: translateY(-20px) rotateX(5deg) rotateY(-5deg); }
-            100% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
-        }
-
-        @keyframes borderGlowLoop {
-            0% { border-color: rgba(121, 40, 202, 0.4); box-shadow: 0 0 15px rgba(121, 40, 202, 0.2); }
-            50% { border-color: rgba(0, 223, 216, 0.6); box-shadow: 0 0 25px rgba(0, 223, 216, 0.4); }
-            100% { border-color: rgba(255, 0, 128, 0.4); box-shadow: 0 0 15px rgba(255, 0, 128, 0.2); }
-        }
-
-        @keyframes rotate3DSpin {
-            0% { transform: rotate3d(1, 1, 1, 0deg); }
-            100% { transform: rotate3d(1, 1, 1, 360deg); }
-        }
-
-        @keyframes shimmerEffect {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        @keyframes marqueeScroll {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-50%); }
-        }
-
-        @keyframes rippleExpand {
-            0% { width: 0px; height: 0px; opacity: 0.8; }
-            100% { width: 500px; height: 500px; opacity: 0; }
-        }
-
-        @keyframes neonPulse {
-            0%, 100% { opacity: 1; filter: drop-shadow(0 0 10px var(--accent-cyan)); }
-            50% { opacity: 0.5; filter: drop-shadow(0 0 2px var(--accent-cyan)); }
-        }
-
-        @keyframes bounceIcon {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* ==========================================================================
-           5. NAVIGATION BAR
+           4. NAVIGATION BAR
            ========================================================================== */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 1000;
-            padding: 20px 50px;
+            z-index: 100;
+            padding: 25px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            backdrop-filter: blur(15px);
-            background: rgba(10, 10, 18, 0.6);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: var(--transition-smooth);
+            backdrop-filter: blur(12px);
+            background: rgba(248, 246, 252, 0.7);
+            border-bottom: 1px solid rgba(138, 43, 226, 0.1);
         }
 
-        .logo {
+        .brand-logo {
             font-size: 1.8rem;
             font-weight: 800;
-            letter-spacing: 1px;
-            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-pink));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--purple-main);
+            text-decoration: none;
+            letter-spacing: -0.5px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
-        .logo-icon {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-glow));
-            border-radius: 8px;
-            animation: rotate3DSpin 10s linear infinite;
+        .brand-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--purple-bright);
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulseDot 1.5s infinite;
+        }
+
+        @keyframes pulseDot {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 40px;
         }
 
         nav a {
-            color: var(--text-muted);
             text-decoration: none;
-            font-weight: 500;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.95rem;
             position: relative;
             padding: 5px 0;
-            transition: var(--transition-fast);
+            transition: var(--transition-smooth);
         }
 
         nav a::after {
@@ -269,12 +202,12 @@
             left: 0;
             width: 0%;
             height: 2px;
-            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-pink));
-            transition: var(--transition-fast);
+            background: var(--purple-main);
+            transition: var(--transition-smooth);
         }
 
         nav a:hover {
-            color: var(--text-main);
+            color: var(--purple-main);
         }
 
         nav a:hover::after {
@@ -282,746 +215,574 @@
         }
 
         /* ==========================================================================
-           6. HERO SECTION
+           5. HERO SECTION (MATCHING 2ND IMAGE LAYOUT)
            ========================================================================== */
-        .hero {
+        .hero-section {
+            position: relative;
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 120px 10% 60px 10%;
-            position: relative;
-            gap: 50px;
-        }
-
-        .hero-content {
-            max-width: 600px;
-            z-index: 2;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-glow);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 25px;
-            animation: borderGlowLoop 4s infinite alternate;
-        }
-
-        .badge-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: var(--accent-cyan);
-            animation: neonPulse 1.5s infinite;
-        }
-
-        .hero-title {
-            font-size: 4rem;
-            line-height: 1.1;
-            font-weight: 900;
-            margin-bottom: 20px;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-pink), var(--accent-gold), var(--accent-glow));
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: textGradientStream 6s ease infinite;
-        }
-
-        .hero-description {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 35px;
-        }
-
-        .cta-group {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .btn {
-            position: relative;
-            padding: 16px 36px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            text-decoration: none;
-            overflow: hidden;
-            display: inline-flex;
-            align-items: center;
             justify-content: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: var(--transition-bounce);
-            border: none;
+            padding: 120px 5% 60px 5%;
+            z-index: 2;
+            overflow: hidden;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-glow), var(--accent-pink));
-            color: var(--text-main);
-            box-shadow: 0 10px 25px rgba(255, 0, 128, 0.4);
-        }
-
-        .btn-primary::before {
-            content: '';
+        /* Large Background Typography ("Hasindu Chanuka") */
+        .giant-back-text {
             position: absolute;
-            top: 0;
-            left: -100%;
+            top: 52%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(4rem, 12vw, 13rem);
+            font-weight: 900;
+            color: rgba(30, 25, 42, 0.88);
+            white-space: nowrap;
+            letter-spacing: -2px;
+            z-index: 1;
+            user-select: none;
+            pointer-events: none;
+            text-align: center;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: 0.5s;
+            line-height: 1;
+            animation: textFloat3D 8s ease-in-out infinite alternate;
         }
 
-        .btn-primary:hover::before {
-            left: 100%;
+        @keyframes textFloat3D {
+            0% { transform: translate(-50%, -50%) translateY(0px) scale(1); }
+            100% { transform: translate(-50%, -50%) translateY(-15px) scale(1.02); }
         }
 
-        .btn-primary:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 15px 35px rgba(255, 0, 128, 0.6);
+        /* Side Titles & Subtitles */
+        .hero-text-left {
+            position: absolute;
+            left: 8%;
+            top: 32%;
+            z-index: 3;
         }
 
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-main);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
+        .hero-greeting {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--purple-main);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            animation: slideInLeft 1s ease forwards;
         }
 
-        .btn-secondary:hover {
-            border-color: var(--accent-cyan);
-            color: var(--accent-cyan);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 223, 216, 0.2);
+        .hero-text-bottom-left {
+            position: absolute;
+            left: 8%;
+            bottom: 22%;
+            z-index: 3;
         }
 
-        .hero-visual {
+        .hero-role {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--purple-main);
+            animation: slideInLeft 1.2s ease forwards;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Center Profile Cutout Image Layer */
+        .profile-container {
             position: relative;
-            z-index: 2;
-            flex: 1;
+            z-index: 2; /* In front of giant text */
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-end;
+            height: 75vh;
+            max-height: 700px;
+            margin-top: 40px;
         }
 
-        .visual-card-wrapper {
+        .profile-wrapper {
             position: relative;
-            width: 380px;
-            height: 480px;
-            animation: heroFloatingCard 6s ease-in-out infinite;
-            perspective: 1000px;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            cursor: pointer;
         }
 
-        .visual-card {
-            width: 100%;
+        .profile-cutout-img {
             height: 100%;
-            border-radius: 24px;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 40px rgba(138, 43, 226, 0.25));
+            transition: var(--transition-smooth);
+            transform-origin: bottom center;
+            animation: floatProfile 6s ease-in-out infinite alternate;
+        }
+
+        .profile-wrapper:hover .profile-cutout-img {
+            transform: scale(1.03) translateY(-10px);
+            filter: drop-shadow(0 30px 60px rgba(138, 43, 226, 0.45));
+        }
+
+        @keyframes floatProfile {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-12px); }
+        }
+
+        /* Floating Social Icons floating near Profile Cutout */
+        .floating-socials {
+            position: absolute;
+            right: 8%;
+            top: 45%;
             display: flex;
             flex-direction: column;
-            padding: 20px;
-            position: relative;
+            gap: 20px;
+            z-index: 4;
         }
 
-        .visual-card img {
-            width: 100%;
-            height: 260px;
-            object-fit: cover;
-            border-radius: 16px;
-            transition: var(--transition-smooth);
-        }
-
-        .visual-card:hover img {
-            transform: scale(1.05);
-        }
-
-        .card-info {
-            margin-top: 20px;
-        }
-
-        .card-title {
-            font-size: 1.3rem;
-            margin-bottom: 8px;
-        }
-
-        .card-subtitle {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        /* Floating badges over visual card */
-        .floating-tag {
-            position: absolute;
-            padding: 10px 18px;
-            border-radius: 12px;
-            background: rgba(18, 18, 37, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
             display: flex;
             align-items: center;
-            gap: 10px;
-            z-index: 3;
-            animation: bounceIcon 3s ease-in-out infinite alternate;
+            justify-content: center;
+            color: var(--purple-main);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: var(--transition-bounce);
         }
 
-        .tag-1 { top: 20px; left: -30px; }
-        .tag-2 { bottom: 30px; right: -30px; animation-delay: -1.5s; }
-
-        /* ==========================================================================
-           7. MARQUEE INFINITE TICKER
-           ========================================================================== */
-        .marquee-section {
-            padding: 30px 0;
-            background: rgba(255, 255, 255, 0.01);
-            border-y: 1px solid rgba(255, 255, 255, 0.05);
-            overflow: hidden;
-            white-space: nowrap;
-            position: relative;
-        }
-
-        .marquee-track {
-            display: inline-flex;
-            gap: 60px;
-            animation: marqueeScroll 25s linear infinite;
-        }
-
-        .marquee-item {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: rgba(255, 255, 255, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: var(--transition-fast);
-        }
-
-        .marquee-item:hover {
-            color: var(--accent-cyan);
-            text-shadow: 0 0 10px var(--accent-cyan);
+        .social-btn:hover {
+            background: var(--purple-main);
+            color: var(--white);
+            transform: scale(1.15) rotate(8deg);
+            box-shadow: 0 15px 30px var(--purple-glow);
         }
 
         /* ==========================================================================
-           8. ANIMATED IMAGE GALLERY SECTION
+           6. ABOUT & EXPERIENCE SECTION
            ========================================================================== */
         .section-padding {
-            padding: 100px 10%;
+            padding: 120px 10%;
+            position: relative;
+            z-index: 2;
         }
 
-        .section-header {
+        .section-title-wrapper {
             text-align: center;
-            max-width: 700px;
-            margin: 0 auto 60px auto;
+            margin-bottom: 70px;
         }
 
-        .section-header h2 {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
-        }
-
-        .section-header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        .gallery-card {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            height: 380px;
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            cursor: pointer;
-            group: gallery-card;
-        }
-
-        .gallery-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
-        }
-
-        .gallery-card-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 30%, rgba(10, 10, 18, 0.95) 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 30px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: var(--transition-smooth);
-        }
-
-        .gallery-card:hover img {
-            transform: scale(1.15) rotate(1deg);
-            filter: brightness(0.8);
-        }
-
-        .gallery-card:hover .gallery-card-overlay {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .gallery-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--text-main);
-        }
-
-        .gallery-desc {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin-bottom: 15px;
-        }
-
-        .gallery-tag {
+        .section-tag {
             display: inline-block;
-            padding: 4px 12px;
-            background: rgba(0, 223, 216, 0.2);
-            color: var(--accent-cyan);
-            border-radius: 20px;
-            font-size: 0.8rem;
-            align-self: flex-start;
+            padding: 6px 18px;
+            background: var(--purple-soft);
+            color: var(--purple-main);
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
         }
 
-        /* ==========================================================================
-           9. FEATURE CARDS WITH INTERACTIVE GLOW
-           ========================================================================== */
-        .features-grid {
+        .section-heading {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+
+        .about-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
         }
 
-        .feature-box {
-            position: relative;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 40px 30px;
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(138, 43, 226, 0.15);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
             transition: var(--transition-smooth);
+            position: relative;
             overflow: hidden;
         }
 
-        .feature-box::before {
+        .glass-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-pink));
+            height: 4px;
+            background: linear-gradient(90deg, var(--purple-main), var(--purple-bright));
             opacity: 0;
-            transition: var(--transition-fast);
+            transition: var(--transition-smooth);
         }
 
-        .feature-box:hover {
+        .glass-card:hover {
             transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 30px 60px rgba(138, 43, 226, 0.15);
         }
 
-        .feature-box:hover::before {
+        .glass-card:hover::before {
             opacity: 1;
         }
 
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            color: var(--accent-cyan);
-            transition: var(--transition-bounce);
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: bounceSoft 3s infinite ease-in-out;
         }
 
-        .feature-box:hover .feature-icon {
-            transform: scale(1.1) rotate(5deg);
-            background: var(--accent-cyan);
-            color: #000;
+        @keyframes bounceSoft {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 1rem;
         }
 
         /* ==========================================================================
-           10. SCROLL REVEAL ANIMATION CLASSES (INTERSECTION OBSERVER)
+           7. INTERACTIVE PROJECTS SHOWCASE
            ========================================================================== */
-        .reveal-on-scroll {
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 35px;
+        }
+
+        .project-card {
+            border-radius: 24px;
+            overflow: hidden;
+            background: var(--white);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .project-img-container {
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .project-card:hover img {
+            transform: scale(1.1) rotate(1deg);
+        }
+
+        .project-body {
+            padding: 30px;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .tag-pill {
+            padding: 4px 12px;
+            background: var(--purple-soft);
+            color: var(--purple-main);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* ==========================================================================
+           8. SCROLL REVEAL ANIMATION CLASSES
+           ========================================================================== */
+        .reveal {
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(40px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
 
-        .reveal-on-scroll.active {
+        .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .reveal-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .reveal-left.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .reveal-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .reveal-right.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
         /* ==========================================================================
-           11. FOOTER SECTION
+           9. FOOTER
            ========================================================================== */
         footer {
             background: var(--bg-secondary);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--white);
             padding: 80px 10% 40px 10%;
             position: relative;
-            overflow: hidden;
+            z-index: 2;
         }
 
         .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 50px;
+            flex-wrap: wrap;
+            gap: 30px;
         }
 
-        .footer-brand p {
-            color: var(--text-muted);
-            margin-top: 15px;
-            line-height: 1.6;
+        .footer-heading {
+            font-size: 2.2rem;
+            font-weight: 800;
         }
 
-        .footer-column h4 {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .footer-column ul {
-            list-style: none;
-        }
-
-        .footer-column li {
-            margin-bottom: 12px;
-        }
-
-        .footer-column a {
-            color: var(--text-muted);
+        .cta-btn {
+            padding: 16px 36px;
+            background: var(--purple-main);
+            color: var(--white);
             text-decoration: none;
-            transition: var(--transition-fast);
+            border-radius: 50px;
+            font-weight: 700;
+            transition: var(--transition-bounce);
+            display: inline-block;
+            box-shadow: 0 10px 25px var(--purple-glow);
         }
 
-        .footer-column a:hover {
-            color: var(--accent-cyan);
-            padding-left: 5px;
+        .cta-btn:hover {
+            background: var(--purple-bright);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px var(--purple-glow);
         }
 
         .footer-bottom {
             text-align: center;
             padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            color: var(--text-muted);
+            color: rgba(255, 255, 255, 0.5);
             font-size: 0.9rem;
         }
 
         /* ==========================================================================
-           12. RESPONSIVE MEDIA QUERIES
+           10. RESPONSIVE MEDIA QUERIES
            ========================================================================== */
         @media (max-width: 992px) {
-            .hero {
-                flex-direction: column;
+            .hero-text-left, .hero-text-bottom-left {
+                position: relative;
+                left: auto;
+                top: auto;
+                bottom: auto;
                 text-align: center;
-                padding-top: 150px;
             }
-            .hero-content {
-                max-width: 100%;
-            }
-            .cta-group {
+            .hero-section {
+                flex-direction: column;
                 justify-content: center;
             }
-            .visual-card-wrapper {
-                width: 300px;
-                height: 400px;
+            .giant-back-text {
+                font-size: 15vw;
             }
-        }
-
-        @media (max-width: 768px) {
-            header {
-                padding: 15px 20px;
+            .floating-socials {
+                position: relative;
+                right: auto;
+                top: auto;
+                flex-direction: row;
+                margin-top: 20px;
             }
-            nav {
-                display: none; /* Can be expanded into hamburger menu */
-            }
-            .hero-title {
-                font-size: 2.8rem;
-            }
-            .section-padding {
-                padding: 60px 5%;
+            .profile-container {
+                height: 50vh;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Custom Cursor Canvas / Overlays -->
+    <!-- Custom Cursor -->
     <div class="cursor-dot" id="cursor-dot"></div>
-    <div class="cursor-outline" id="cursor-outline"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
 
-    <!-- Background Particle Canvas & Ambient Blobs -->
-    <canvas id="particle-canvas"></canvas>
-    <div class="background-blobs">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
+    <!-- Ambient Particle Canvas and Soft Smoke/Cloud Background -->
+    <canvas id="interactive-bg-canvas"></canvas>
+    <div class="ambient-cloud-container">
+        <div class="ambient-cloud cloud-1"></div>
+        <div class="ambient-cloud cloud-2"></div>
+        <div class="ambient-cloud cloud-3"></div>
     </div>
 
-    <!-- Header / Navigation -->
+    <!-- Header Navigation Bar -->
     <header>
-        <div class="logo">
-            <div class="logo-icon"></div>
-            <span>AETHERIA</span>
-        </div>
+        <a href="#" class="brand-logo">Hasindu <span class="brand-dot"></span></a>
         <nav>
             <ul>
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#footer">Contact</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-content reveal-left">
-            <div class="badge">
-                <span class="badge-dot"></span>
-                Next-Gen Animation Suite
-            </div>
-            <h1 class="hero-title">
-                Crafting <span class="gradient-text">Visual Magic</span> For The Digital Era
-            </h1>
-            <p class="hero-description">
-                Experience ultra-smooth dynamic rendering, custom keyframe engines, dynamic light refraction, and interactive image canvases designed to bring web layouts to life.
-            </p>
-            <div class="cta-group">
-                <a href="#gallery" class="btn btn-primary">Explore Gallery ➔</a>
-                <a href="#features" class="btn btn-secondary">Learn More</a>
+    <!-- Main Hero Section (Matches image_c8e1d2 Layout) -->
+    <section class="hero-section" id="home">
+        
+        <!-- Left Side Subtitle "HELLO! I AM" -->
+        <div class="hero-text-left">
+            <h2 class="hero-greeting">HELLO! I AM</h2>
+        </div>
+
+        <!-- Centered Background Giant Text -->
+        <h1 class="giant-back-text">Hasindu Chanuka</h1>
+
+        <!-- Profile Cutout Image Layer (In Front) -->
+        <div class="profile-container">
+            <div class="profile-wrapper">
+                <!-- Replace with your cutout image link -->
+                <img src="https://i.ibb.co/6P01K08/profile-cutout.png" alt="Hasindu Chanuka Profile Cutout" class="profile-cutout-img">
             </div>
         </div>
 
-        <div class="hero-visual reveal-right">
-            <div class="visual-card-wrapper" id="tilt-card">
-                <!-- Replace with your image link -->
-                <div class="floating-tag tag-1">
-                    <span>⚡ Smooth 60fps</span>
+        <!-- Bottom Left Role Title "Full Stack Dev" -->
+        <div class="hero-text-bottom-left">
+            <h3 class="hero-role">Full Stack Dev</h3>
+        </div>
+
+        <!-- Floating Side Social Links -->
+        <div class="floating-socials">
+            <a href="#" class="social-btn" title="LinkedIn">in</a>
+            <a href="#" class="social-btn" title="GitHub">git</a>
+            <a href="#" class="social-btn" title="Instagram">ig</a>
+        </div>
+    </section>
+
+    <!-- About / Skills Section -->
+    <section class="section-padding" id="about">
+        <div class="section-title-wrapper reveal">
+            <span class="section-tag">About Me</span>
+            <h2 class="section-heading">Architecting Digital Experiences</h2>
+        </div>
+
+        <div class="about-grid">
+            <div class="glass-card reveal">
+                <div class="card-icon">⚡</div>
+                <h3 class="card-title">Frontend Engineering</h3>
+                <p class="card-desc">Specialized in building performant, motion-rich user interfaces with React, Next.js, and modern CSS/canvas visual engines.</p>
+            </div>
+
+            <div class="glass-card reveal" style="transition-delay: 0.15s;">
+                <div class="card-icon">⚙️</div>
+                <h3 class="card-title">Backend Architecture</h3>
+                <p class="card-desc">Designing robust RESTful and GraphQL APIs utilizing Node.js, Spring Boot, and scalable database cluster solutions.</p>
+            </div>
+
+            <div class="glass-card reveal" style="transition-delay: 0.3s;">
+                <div class="card-icon">🎨</div>
+                <h3 class="card-title">Creative Motion & UI</h3>
+                <p class="card-desc">Transforming static concepts into smooth, high-fps interactive animations with fluid parallax physics.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section-padding" id="projects">
+        <div class="section-title-wrapper reveal">
+            <span class="section-tag">Portfolio</span>
+            <h2 class="section-heading">Featured Works</h2>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card reveal">
+                <div class="project-img-container">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Project 1">
                 </div>
-                <div class="floating-tag tag-2">
-                    <span>🎨 3D Parallax</span>
+                <div class="project-body">
+                    <h3 class="project-title">Analytics Platform</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Real-time interactive dashboard featuring dynamic charts and automated data ingestion.</p>
+                    <div class="project-tags">
+                        <span class="tag-pill">Next.js</span>
+                        <span class="tag-pill">TypeScript</span>
+                        <span class="tag-pill">Tailwind</span>
+                    </div>
                 </div>
-                <div class="visual-card">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" alt="Hero Interactive Visual">
-                    <div class="card-info">
-                        <h3 class="card-title">Interactive Motion</h3>
-                        <p class="card-subtitle">Move your cursor over this card to experience real-time 3D physics lighting.</p>
+            </div>
+
+            <div class="project-card reveal" style="transition-delay: 0.15s;">
+                <div class="project-img-container">
+                    <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80" alt="Project 2">
+                </div>
+                <div class="project-body">
+                    <h3 class="project-title">E-Commerce Engine</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">High-converting shopping experience with dynamic payment gateway integrations.</p>
+                    <div class="project-tags">
+                        <span class="tag-pill">React</span>
+                        <span class="tag-pill">Node.js</span>
+                        <span class="tag-pill">MongoDB</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Infinite Marquee Ticker -->
-    <div class="marquee-section">
-        <div class="marquee-track">
-            <div class="marquee-item">✦ Dynamic Keyframes</div>
-            <div class="marquee-item">✦ 3D Transforms</div>
-            <div class="marquee-item">✦ Particle Systems</div>
-            <div class="marquee-item">✦ Glassmorphism UI</div>
-            <div class="marquee-item">✦ Reactive Canvas</div>
-            <!-- Repeated for seamless loop -->
-            <div class="marquee-item">✦ Dynamic Keyframes</div>
-            <div class="marquee-item">✦ 3D Transforms</div>
-            <div class="marquee-item">✦ Particle Systems</div>
-            <div class="marquee-item">✦ Glassmorphism UI</div>
-            <div class="marquee-item">✦ Reactive Canvas</div>
-        </div>
-    </div>
-
-    <!-- Animated Image Gallery Section -->
-    <section class="section-padding" id="gallery">
-        <div class="section-header reveal-on-scroll">
-            <h2>Animated Image Showcase</h2>
-            <p>Hover over the cards to unveil hidden depth transitions and interactive dynamic lighting filters.</p>
-        </div>
-
-        <div class="gallery-grid">
-            <!-- Gallery Item 1 -->
-            <div class="gallery-card reveal-on-scroll">
-                <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80" alt="Abstract Art">
-                <div class="gallery-card-overlay">
-                    <span class="gallery-tag">Abstract</span>
-                    <h3 class="gallery-title">Fluid Nebula</h3>
-                    <p class="gallery-desc">Dynamic multi-layer color blending rendered using custom CSS animations.</p>
-                </div>
-            </div>
-
-            <!-- Gallery Item 2 -->
-            <div class="gallery-card reveal-on-scroll" style="transition-delay: 0.15s;">
-                <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=800&q=80" alt="Cyber Neon">
-                <div class="gallery-card-overlay">
-                    <span class="gallery-tag">Cyberpunk</span>
-                    <h3 class="gallery-title">Neon Lights</h3>
-                    <p class="gallery-desc">High contrast visual aesthetics with real-time glow reflections.</p>
-                </div>
-            </div>
-
-            <!-- Gallery Item 3 -->
-            <div class="gallery-card reveal-on-scroll" style="transition-delay: 0.3s;">
-                <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=800&q=80" alt="3D Sphere">
-                <div class="gallery-card-overlay">
-                    <span class="gallery-tag">3D Render</span>
-                    <h3 class="gallery-title">Prismatic Sphere</h3>
-                    <p class="gallery-desc">Complex geometric shapes interacting with virtual atmospheric physics.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="section-padding" id="features">
-        <div class="section-header reveal-on-scroll">
-            <h2>Built For Visual Power</h2>
-            <p>Explore the features engineered directly into this lightweight layout engine.</p>
-        </div>
-
-        <div class="features-grid">
-            <div class="feature-box reveal-on-scroll">
-                <div class="feature-icon">🚀</div>
-                <h3>Hardware Accelerated</h3>
-                <p>Leveraging native GPU transforms to keep animations buttery smooth at high screen refresh rates.</p>
-            </div>
-
-            <div class="feature-box reveal-on-scroll" style="transition-delay: 0.15s;">
-                <div class="feature-icon">✨</div>
-                <h3>Reactive Physics</h3>
-                <p>Particles, cards, and interactive elements calculate mouse proximity and momentum dynamically.</p>
-            </div>
-
-            <div class="feature-box reveal-on-scroll" style="transition-delay: 0.3s;">
-                <div class="feature-icon">💎</div>
-                <h3>Glassmorphism UI</h3>
-                <p>Multi-layered frosted glass overlays with dynamic light reflection keyframes.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="footer">
+    <!-- Footer / Contact -->
+    <footer id="contact">
         <div class="footer-content">
-            <div class="footer-brand">
-                <div class="logo">
-                    <div class="logo-icon"></div>
-                    <span>AETHERIA</span>
-                </div>
-                <p>An elite playground designed for responsive web interactions and modern layout animations.</p>
+            <div>
+                <h2 class="footer-heading">Let's Build Something Great Together</h2>
+                <p style="color: rgba(255,255,255,0.6); margin-top: 10px;">Available for full-time roles and high-impact engineering projects.</p>
             </div>
-            <div class="footer-column">
-                <h4>Navigation</h4>
-                <ul>
-                    <li><a href="#hero">Home</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#features">Features</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>Socials</h4>
-                <ul>
-                    <li><a href="#">GitHub</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">CodePen</a></li>
-                </ul>
-            </div>
+            <a href="mailto:contact@hasindu.dev" class="cta-btn">Get In Touch ➔</a>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 AETHERIA Animations. Created for interactive web experiences.</p>
+            <p>&copy; 2026 Hasindu Chanuka. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- ==========================================================================
-       13. INTERACTIVE JAVASCRIPT ENGINE
-       ========================================================================== -->
+    <!-- Interactive JavaScript Engine -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            /* ------------------------------------------------------------------
-               A. CUSTOM CURSOR TRAIL & FOLLOWER
-               ------------------------------------------------------------------ */
-            const cursorDot = document.getElementById('cursor-dot');
-            const cursorOutline = document.getElementById('cursor-outline');
+            /* 1. ANIMATED CURSOR SCRIPT */
+            const dot = document.getElementById('cursor-dot');
+            const follower = document.getElementById('cursor-follower');
 
             window.addEventListener('mousemove', (e) => {
-                const posX = e.clientX;
-                const posY = e.clientY;
+                dot.style.left = `${e.clientX}px`;
+                dot.style.top = `${e.clientY}px`;
 
-                // Move inner dot instantly
-                cursorDot.style.left = `${posX}px`;
-                cursorDot.style.top = `${posY}px`;
-
-                // Move outer outline with small lag using animate API
-                cursorOutline.animate({
-                    left: `${posX}px`,
-                    top: `${posY}px`
-                }, { duration: 500, fill: "forwards" });
+                follower.animate({
+                    left: `${e.clientX}px`,
+                    top: `${e.clientY}px`
+                }, { duration: 400, fill: "forwards" });
             });
 
-            /* ------------------------------------------------------------------
-               B. INTERACTIVE CANVAS PARTICLE ENGINE
-               ------------------------------------------------------------------ */
-            const canvas = document.getElementById('particle-canvas');
+            /* 2. INTERACTIVE PARTICLE BG CANVAS */
+            const canvas = document.getElementById('interactive-bg-canvas');
             const ctx = canvas.getContext('2d');
 
             let width = canvas.width = window.innerWidth;
@@ -1032,108 +793,56 @@
                 height = canvas.height = window.innerHeight;
             });
 
-            const particles = [];
-            const particleCount = Math.min(width / 15, 80);
-
-            class Particle {
+            class FloatingParticle {
                 constructor() {
                     this.x = Math.random() * width;
                     this.y = Math.random() * height;
-                    this.vx = (Math.random() - 0.5) * 1.2;
-                    this.vy = (Math.random() - 0.5) * 1.2;
-                    this.radius = Math.random() * 2 + 1;
-                    this.color = Math.random() > 0.5 ? '#00dfd8' : '#ff0080';
+                    this.size = Math.random() * 3 + 1;
+                    this.speedX = (Math.random() - 0.5) * 0.8;
+                    this.speedY = (Math.random() - 0.5) * 0.8;
+                    this.alpha = Math.random() * 0.5 + 0.2;
                 }
 
                 update() {
-                    this.x += this.vx;
-                    this.y += this.vy;
+                    this.x += this.speedX;
+                    this.y += this.speedY;
 
-                    if (this.x < 0 || this.x > width) this.vx *= -1;
-                    if (this.y < 0 || this.y > height) this.vy *= -1;
+                    if (this.x < 0) this.x = width;
+                    if (this.x > width) this.x = 0;
+                    if (this.y < 0) this.y = height;
+                    if (this.y > height) this.y = 0;
                 }
 
                 draw() {
+                    ctx.fillStyle = `rgba(138, 43, 226, ${this.alpha})`;
                     ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = this.color;
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                     ctx.fill();
                 }
             }
 
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
+            const particleArray = Array.from({ length: 45 }, () => new FloatingParticle());
 
             function animateParticles() {
                 ctx.clearRect(0, 0, width, height);
-
-                for (let i = 0; i < particles.length; i++) {
-                    particles[i].update();
-                    particles[i].draw();
-
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-
-                        if (dist < 120) {
-                            ctx.beginPath();
-                            ctx.strokeStyle = `rgba(121, 40, 202, ${1 - dist / 120})`;
-                            ctx.lineWidth = 0.5;
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.stroke();
-                        }
-                    }
-                }
+                particleArray.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
                 requestAnimationFrame(animateParticles);
             }
             animateParticles();
 
-            /* ------------------------------------------------------------------
-               C. 3D TILT EFFECT FOR HERO CARD
-               ------------------------------------------------------------------ */
-            const tiltCard = document.getElementById('tilt-card');
-            
-            if(tiltCard) {
-                tiltCard.addEventListener('mousemove', (e) => {
-                    const rect = tiltCard.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    
-                    const rotateX = ((y - centerY) / centerY) * -15;
-                    const rotateY = ((x - centerX) / centerX) * 15;
-
-                    tiltCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-                });
-
-                tiltCard.addEventListener('mouseleave', () => {
-                    tiltCard.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-                });
-            }
-
-            /* ------------------------------------------------------------------
-               D. SCROLL REVEAL INTERSECTION OBSERVER
-               ------------------------------------------------------------------ */
-            const observerOptions = {
-                threshold: 0.15
-            };
-
-            const revealObserver = new IntersectionObserver((entries, observer) => {
+            /* 3. SCROLL REVEAL OBSERVER */
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
                     }
                 });
-            }, observerOptions);
+            }, { threshold: 0.15 });
 
-            document.querySelectorAll('.reveal-on-scroll, .reveal-left, .reveal-right').forEach(el => {
-                revealObserver.observe(el);
-            });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         });
     </script>
 </body>
