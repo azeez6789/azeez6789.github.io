@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hasindu Chanuka - Full Stack Developer Portfolio</title>
+    <title>ABDUL AZEEZ  | Full Stack Developer & Systems Architect</title>
     <style>
         /* ==========================================================================
-           1. CORE VARIABLES & THEME DEFINITIONS
+           1. DESIGN SYSTEM & ROOT VARIABLES
            ========================================================================== */
         :root {
-            --bg-primary: #f8f6fc;
-            --bg-secondary: #0d0b18;
-            --text-dark: #1e192a;
-            --text-muted: #625c70;
-            --purple-main: #8a2be2;
-            --purple-bright: #a142f5;
-            --purple-glow: rgba(138, 43, 226, 0.4);
-            --purple-soft: #f0e6ff;
-            --white: #ffffff;
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --text-light: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-indigo: #6366f1;
+            --glow-blue: rgba(59, 130, 246, 0.35);
+            --glow-cyan: rgba(6, 182, 212, 0.25);
+            --border-subtle: rgba(255, 255, 255, 0.08);
             --font-main: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             --transition-bounce: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -33,7 +35,7 @@
             scroll-behavior: smooth;
             font-family: var(--font-main);
             background-color: var(--bg-primary);
-            color: var(--text-dark);
+            color: var(--text-light);
             overflow-x: hidden;
         }
 
@@ -43,9 +45,9 @@
         }
 
         /* ==========================================================================
-           2. CUSTOM ANIMATED CURSOR
+           2. CUSTOM DYNAMIC CURSOR
            ========================================================================== */
-        .cursor-dot, .cursor-follower {
+        .cursor-dot, .cursor-outline {
             pointer-events: none;
             position: fixed;
             top: 0;
@@ -59,26 +61,27 @@
         .cursor-dot {
             width: 8px;
             height: 8px;
-            background-color: var(--purple-main);
+            background-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan);
         }
 
-        .cursor-follower {
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--purple-main);
-            transition: transform 0.15s ease-out, width 0.3s ease, height 0.3s ease;
-            animation: pulseGlow 2s infinite ease-in-out;
+        .cursor-outline {
+            width: 42px;
+            height: 42px;
+            border: 2px solid var(--accent-blue);
+            transition: transform 0.15s ease-out;
+            animation: pulseCursor 2s infinite ease-in-out;
         }
 
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 10px var(--purple-glow); }
-            50% { box-shadow: 0 0 25px var(--purple-glow); }
+        @keyframes pulseCursor {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 15px var(--glow-blue); }
+            50% { transform: translate(-50%, -50%) scale(1.3); box-shadow: 0 0 30px var(--glow-cyan); }
         }
 
         /* ==========================================================================
-           3. BACKGROUND ATMOSPHERE & CANVAS ANIMATIONS
+           3. BACKGROUND ATMOSPHERE & CANVAS PARTICLES
            ========================================================================== */
-        #interactive-bg-canvas {
+        #particle-canvas {
             position: fixed;
             top: 0;
             left: 0;
@@ -88,52 +91,52 @@
             pointer-events: none;
         }
 
-        .ambient-cloud-container {
-            position: absolute;
+        .ambient-glow-container {
+            position: fixed;
             inset: 0;
             overflow: hidden;
             z-index: 1;
             pointer-events: none;
         }
 
-        .ambient-cloud {
+        .glow-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(90px);
-            opacity: 0.55;
-            animation: floatCloud 20s infinite alternate ease-in-out;
+            filter: blur(120px);
+            opacity: 0.45;
+            animation: floatOrb 18s infinite ease-in-out alternate;
         }
 
-        .cloud-1 {
+        .orb-1 {
             top: -10%;
-            left: 20%;
+            left: 30%;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, #c782ff 0%, #e0b0ff 50%, transparent 80%);
+            background: radial-gradient(circle, var(--accent-blue) 0%, transparent 70%);
         }
 
-        .cloud-2 {
-            bottom: 10%;
-            right: -5%;
+        .orb-2 {
+            bottom: 5%;
+            right: -10%;
             width: 700px;
             height: 700px;
-            background: radial-gradient(circle, #b15eff 0%, #f3d5ff 60%, transparent 80%);
-            animation-delay: -7s;
+            background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 70%);
+            animation-delay: -6s;
         }
 
-        .cloud-3 {
+        .orb-3 {
             top: 40%;
-            left: -10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, #d291ff 0%, transparent 70%);
+            left: -15%;
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, var(--accent-indigo) 0%, transparent 70%);
             animation-delay: -12s;
         }
 
-        @keyframes floatCloud {
+        @keyframes floatOrb {
             0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            50% { transform: translate(60px, 40px) scale(1.15) rotate(180deg); }
-            100% { transform: translate(-40px, 80px) scale(0.9) rotate(360deg); }
+            50% { transform: translate(80px, 50px) scale(1.15) rotate(180deg); }
+            100% { transform: translate(-50px, 90px) scale(0.9) rotate(360deg); }
         }
 
         /* ==========================================================================
@@ -145,49 +148,44 @@
             left: 0;
             width: 100%;
             z-index: 100;
-            padding: 25px 8%;
+            padding: 22px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            backdrop-filter: blur(12px);
-            background: rgba(248, 246, 252, 0.7);
-            border-bottom: 1px solid rgba(138, 43, 226, 0.1);
+            backdrop-filter: blur(16px);
+            background: rgba(10, 14, 23, 0.75);
+            border-bottom: 1px solid var(--border-subtle);
         }
 
         .brand-logo {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 800;
-            color: var(--purple-main);
+            color: var(--text-light);
             text-decoration: none;
             letter-spacing: -0.5px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
-        .brand-dot {
-            width: 10px;
-            height: 10px;
-            background: var(--purple-bright);
-            border-radius: 50%;
-            display: inline-block;
-            animation: pulseDot 1.5s infinite;
+        .brand-logo span {
+            color: var(--accent-cyan);
         }
 
-        @keyframes pulseDot {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.5); opacity: 0.5; }
+        .code-icon {
+            color: var(--accent-blue);
+            font-weight: bold;
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 40px;
+            gap: 35px;
         }
 
         nav a {
             text-decoration: none;
-            color: var(--text-dark);
+            color: var(--text-muted);
             font-weight: 600;
             font-size: 0.95rem;
             position: relative;
@@ -202,20 +200,35 @@
             left: 0;
             width: 0%;
             height: 2px;
-            background: var(--purple-main);
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
             transition: var(--transition-smooth);
         }
 
         nav a:hover {
-            color: var(--purple-main);
+            color: var(--text-light);
         }
 
         nav a:hover::after {
             width: 100%;
         }
 
+        .nav-btn {
+            padding: 10px 22px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            color: #fff !important;
+            font-weight: 600;
+            box-shadow: 0 4px 15px var(--glow-blue);
+            transition: var(--transition-bounce) !important;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 25px var(--glow-blue);
+        }
+
         /* ==========================================================================
-           5. HERO SECTION (MATCHING 2ND IMAGE LAYOUT)
+           5. HERO SECTION (CUSTOMIZED FRONT-IMAGE CUTOUT LAYOUT)
            ========================================================================== */
         .hero-section {
             position: relative;
@@ -223,20 +236,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 120px 5% 60px 5%;
+            padding: 120px 5% 40px 5%;
             z-index: 2;
             overflow: hidden;
         }
 
-        /* Large Background Typography ("Hasindu Chanuka") */
+        /* Oversized Layered Background Text */
         .giant-back-text {
             position: absolute;
-            top: 52%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: clamp(4rem, 12vw, 13rem);
+            font-size: clamp(3.8rem, 11vw, 12rem);
             font-weight: 900;
-            color: rgba(30, 25, 42, 0.88);
+            color: rgba(255, 255, 255, 0.05);
             white-space: nowrap;
             letter-spacing: -2px;
             z-index: 1;
@@ -245,15 +258,16 @@
             text-align: center;
             width: 100%;
             line-height: 1;
-            animation: textFloat3D 8s ease-in-out infinite alternate;
+            animation: textFloat 8s ease-in-out infinite alternate;
+            text-transform: uppercase;
         }
 
-        @keyframes textFloat3D {
-            0% { transform: translate(-50%, -50%) translateY(0px) scale(1); }
-            100% { transform: translate(-50%, -50%) translateY(-15px) scale(1.02); }
+        @keyframes textFloat {
+            0% { transform: translate(-50%, -50%) translateY(0px); }
+            100% { transform: translate(-50%, -50%) translateY(-18px); }
         }
 
-        /* Side Titles & Subtitles */
+        /* Left Greetings */
         .hero-text-left {
             position: absolute;
             left: 8%;
@@ -262,35 +276,38 @@
         }
 
         .hero-greeting {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 800;
-            color: var(--purple-main);
-            letter-spacing: 2px;
+            color: var(--accent-cyan);
+            letter-spacing: 3px;
             text-transform: uppercase;
-            margin-bottom: 10px;
-            animation: slideInLeft 1s ease forwards;
+            margin-bottom: 8px;
+            text-shadow: 0 0 15px var(--glow-cyan);
         }
 
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 250px;
+        }
+
+        /* Bottom Left Role */
         .hero-text-bottom-left {
             position: absolute;
             left: 8%;
-            bottom: 22%;
+            bottom: 18%;
             z-index: 3;
         }
 
         .hero-role {
             font-size: 2.2rem;
             font-weight: 800;
-            color: var(--purple-main);
-            animation: slideInLeft 1.2s ease forwards;
+            background: linear-gradient(90deg, #ffffff, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        /* Center Profile Cutout Image Layer */
+        /* Center Image Frame Layer */
         .profile-container {
             position: relative;
             z-index: 2; /* In front of giant text */
@@ -298,8 +315,8 @@
             justify-content: center;
             align-items: flex-end;
             height: 75vh;
-            max-height: 700px;
-            margin-top: 40px;
+            max-height: 680px;
+            margin-top: 50px;
         }
 
         .profile-wrapper {
@@ -313,8 +330,9 @@
         .profile-cutout-img {
             height: 100%;
             width: auto;
+            max-width: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 20px 40px rgba(138, 43, 226, 0.25));
+            filter: drop-shadow(0 20px 40px rgba(6, 182, 212, 0.3));
             transition: var(--transition-smooth);
             transform-origin: bottom center;
             animation: floatProfile 6s ease-in-out infinite alternate;
@@ -322,7 +340,7 @@
 
         .profile-wrapper:hover .profile-cutout-img {
             transform: scale(1.03) translateY(-10px);
-            filter: drop-shadow(0 30px 60px rgba(138, 43, 226, 0.45));
+            filter: drop-shadow(0 30px 60px rgba(59, 130, 246, 0.5));
         }
 
         @keyframes floatProfile {
@@ -330,43 +348,75 @@
             100% { transform: translateY(-12px); }
         }
 
-        /* Floating Social Icons floating near Profile Cutout */
+        /* Floating Social Cards */
         .floating-socials {
             position: absolute;
             right: 8%;
-            top: 45%;
+            top: 40%;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 18px;
             z-index: 4;
         }
 
         .social-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--white);
-            border: 1px solid rgba(138, 43, 226, 0.2);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--purple-main);
+            color: var(--text-light);
             text-decoration: none;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: var(--transition-bounce);
         }
 
         .social-btn:hover {
-            background: var(--purple-main);
-            color: var(--white);
-            transform: scale(1.15) rotate(8deg);
-            box-shadow: 0 15px 30px var(--purple-glow);
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            color: #fff;
+            transform: scale(1.15) rotate(6deg);
+            box-shadow: 0 15px 30px var(--glow-blue);
+        }
+
+        /* Floating Info Badge */
+        .floating-badge {
+            position: absolute;
+            right: 8%;
+            bottom: 20%;
+            z-index: 4;
+            padding: 16px 24px;
+            border-radius: 20px;
+            background: rgba(17, 24, 39, 0.85);
+            border: 1px solid var(--border-subtle);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: bounceBadge 4s infinite ease-in-out alternate;
+        }
+
+        @keyframes bounceBadge {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        .badge-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-cyan);
         }
 
         /* ==========================================================================
-           6. ABOUT & EXPERIENCE SECTION
+           6. ABOUT & SKILLS SECTION
            ========================================================================== */
         .section-padding {
             padding: 120px 10%;
@@ -374,7 +424,7 @@
             z-index: 2;
         }
 
-        .section-title-wrapper {
+        .section-header {
             text-align: center;
             margin-bottom: 70px;
         }
@@ -382,8 +432,9 @@
         .section-tag {
             display: inline-block;
             padding: 6px 18px;
-            background: var(--purple-soft);
-            color: var(--purple-main);
+            background: rgba(6, 182, 212, 0.1);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.2);
             border-radius: 30px;
             font-weight: 700;
             font-size: 0.85rem;
@@ -392,25 +443,25 @@
             margin-bottom: 15px;
         }
 
-        .section-heading {
-            font-size: 3rem;
+        .section-title {
+            font-size: 2.8rem;
             font-weight: 800;
-            color: var(--text-dark);
+            color: var(--text-light);
         }
 
         .about-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            gap: 35px;
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.7);
+            background: var(--bg-card);
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(138, 43, 226, 0.15);
+            border: 1px solid var(--border-subtle);
             border-radius: 24px;
             padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             transition: var(--transition-smooth);
             position: relative;
             overflow: hidden;
@@ -422,15 +473,16 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--purple-main), var(--purple-bright));
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
             opacity: 0;
             transition: var(--transition-smooth);
         }
 
         .glass-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(138, 43, 226, 0.15);
+            border-color: rgba(6, 182, 212, 0.3);
+            box-shadow: 0 30px 60px rgba(6, 182, 212, 0.15);
         }
 
         .glass-card:hover::before {
@@ -441,49 +493,43 @@
             font-size: 2.5rem;
             margin-bottom: 20px;
             display: inline-block;
-            animation: bounceSoft 3s infinite ease-in-out;
-        }
-
-        @keyframes bounceSoft {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
         }
 
         .card-title {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 12px;
-            color: var(--text-dark);
+            color: var(--text-light);
         }
 
         .card-desc {
             color: var(--text-muted);
             line-height: 1.7;
-            font-size: 1rem;
+            font-size: 0.98rem;
         }
 
         /* ==========================================================================
-           7. INTERACTIVE PROJECTS SHOWCASE
+           7. FEATURED PROJECTS SHOWCASE
            ========================================================================== */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 35px;
         }
 
         .project-card {
             border-radius: 24px;
             overflow: hidden;
-            background: var(--white);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
             transition: var(--transition-smooth);
             position: relative;
         }
 
         .project-img-container {
             width: 100%;
-            height: 240px;
+            height: 230px;
             overflow: hidden;
             position: relative;
         }
@@ -507,6 +553,7 @@
             font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 10px;
+            color: var(--text-light);
         }
 
         .project-tags {
@@ -518,15 +565,15 @@
 
         .tag-pill {
             padding: 4px 12px;
-            background: var(--purple-soft);
-            color: var(--purple-main);
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent-cyan);
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
         }
 
         /* ==========================================================================
-           8. SCROLL REVEAL ANIMATION CLASSES
+           8. ANIMATION REVEAL CLASSES
            ========================================================================== */
         .reveal {
             opacity: 0;
@@ -544,17 +591,18 @@
            ========================================================================== */
         footer {
             background: var(--bg-secondary);
-            color: var(--white);
+            color: var(--text-light);
             padding: 80px 10% 40px 10%;
             position: relative;
             z-index: 2;
+            border-top: 1px solid var(--border-subtle);
         }
 
         .footer-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid var(--border-subtle);
             padding-bottom: 50px;
             flex-wrap: wrap;
             gap: 30px;
@@ -567,26 +615,25 @@
 
         .cta-btn {
             padding: 16px 36px;
-            background: var(--purple-main);
-            color: var(--white);
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            color: #fff;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 700;
             transition: var(--transition-bounce);
             display: inline-block;
-            box-shadow: 0 10px 25px var(--purple-glow);
+            box-shadow: 0 10px 25px var(--glow-blue);
         }
 
         .cta-btn:hover {
-            background: var(--purple-bright);
             transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 40px var(--purple-glow);
+            box-shadow: 0 20px 40px var(--glow-blue);
         }
 
         .footer-bottom {
             text-align: center;
             padding-top: 30px;
-            color: rgba(255, 255, 255, 0.5);
+            color: var(--text-muted);
             font-size: 0.9rem;
         }
 
@@ -606,7 +653,7 @@
                 justify-content: center;
             }
             .giant-back-text {
-                font-size: 15vw;
+                font-size: 14vw;
             }
             .floating-socials {
                 position: relative;
@@ -614,6 +661,12 @@
                 top: auto;
                 flex-direction: row;
                 margin-top: 20px;
+            }
+            .floating-badge {
+                position: relative;
+                right: auto;
+                bottom: auto;
+                margin-top: 15px;
             }
             .profile-container {
                 height: 50vh;
@@ -623,124 +676,133 @@
 </head>
 <body>
 
-    <!-- Custom Cursor -->
+    <!-- Interactive Cursor -->
     <div class="cursor-dot" id="cursor-dot"></div>
-    <div class="cursor-follower" id="cursor-follower"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
 
-    <!-- Ambient Particle Canvas and Soft Smoke/Cloud Background -->
-    <canvas id="interactive-bg-canvas"></canvas>
-    <div class="ambient-cloud-container">
-        <div class="ambient-cloud cloud-1"></div>
-        <div class="ambient-cloud cloud-2"></div>
-        <div class="ambient-cloud cloud-3"></div>
+    <!-- Background Particles & Ambient Glowing Orbs -->
+    <canvas id="particle-canvas"></canvas>
+    <div class="ambient-glow-container">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
     </div>
 
-    <!-- Header Navigation Bar -->
+    <!-- Header Navigation -->
     <header>
-        <a href="#" class="brand-logo">Hasindu <span class="brand-dot"></span></a>
+        <a href="#" class="brand-logo"><span class="code-icon">&lt;/&gt;</span> Abdul Azeez<span>.dev</span></a>
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact" class="nav-btn">Contact Me</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Main Hero Section (Matches image_c8e1d2 Layout) -->
+    <!-- Main Hero Section -->
     <section class="hero-section" id="home">
         
-        <!-- Left Side Subtitle "HELLO! I AM" -->
+        <!-- Left Greeting Text -->
         <div class="hero-text-left">
             <h2 class="hero-greeting">HELLO! I AM</h2>
+            <p class="hero-subtitle">Software Engineering Undergraduate & Full Stack Developer</p>
         </div>
 
-        <!-- Centered Background Giant Text -->
-        <h1 class="giant-back-text">Hasindu Chanuka</h1>
+        <!-- Oversized Background Typography -->
+        <h1 class="giant-back-text">Abdul Azeez</h1>
 
-        <!-- Profile Cutout Image Layer (In Front) -->
+        <!-- Profile Cutout Frame (In Front of Giant Text) -->
         <div class="profile-container">
             <div class="profile-wrapper">
-                <!-- Replace with your cutout image link -->
-                <img src="https://i.ibb.co/6P01K08/profile-cutout.png" alt="Hasindu Chanuka Profile Cutout" class="profile-cutout-img">
+                <!-- Uses your profile picture 'profile.png' -->
+                <img src="profile.png" alt="Abdul Azeez Profile Photo" class="profile-cutout-img">
             </div>
         </div>
 
-        <!-- Bottom Left Role Title "Full Stack Dev" -->
+        <!-- Bottom Left Role Text -->
         <div class="hero-text-bottom-left">
             <h3 class="hero-role">Full Stack Dev</h3>
         </div>
 
         <!-- Floating Side Social Links -->
         <div class="floating-socials">
+            <a href="#" class="social-btn" title="GitHub">Git</a>
             <a href="#" class="social-btn" title="LinkedIn">in</a>
-            <a href="#" class="social-btn" title="GitHub">git</a>
-            <a href="#" class="social-btn" title="Instagram">ig</a>
+            <a href="#" class="social-btn" title="Twitter">X</a>
+        </div>
+
+        <!-- Floating Badge -->
+        <div class="floating-badge">
+            <span class="badge-dot"></span>
+            <div>
+                <strong style="display:block; font-size: 0.85rem; color: #fff;">Open for Collaboration</strong>
+                <span style="font-size:0.75rem; color: var(--text-muted);">Available for Projects</span>
+            </div>
         </div>
     </section>
 
-    <!-- About / Skills Section -->
+    <!-- About & Expertise Section -->
     <section class="section-padding" id="about">
-        <div class="section-title-wrapper reveal">
+        <div class="section-header reveal">
             <span class="section-tag">About Me</span>
-            <h2 class="section-heading">Architecting Digital Experiences</h2>
+            <h2 class="section-title">Building Scalable Web Solutions</h2>
         </div>
 
         <div class="about-grid">
             <div class="glass-card reveal">
                 <div class="card-icon">⚡</div>
                 <h3 class="card-title">Frontend Engineering</h3>
-                <p class="card-desc">Specialized in building performant, motion-rich user interfaces with React, Next.js, and modern CSS/canvas visual engines.</p>
+                <p class="card-desc">Specialized in modern web interfaces using React, TypeScript, Next.js, and interactive CSS layout systems.</p>
             </div>
 
             <div class="glass-card reveal" style="transition-delay: 0.15s;">
                 <div class="card-icon">⚙️</div>
-                <h3 class="card-title">Backend Architecture</h3>
-                <p class="card-desc">Designing robust RESTful and GraphQL APIs utilizing Node.js, Spring Boot, and scalable database cluster solutions.</p>
+                <h3 class="card-title">Systems Architecture</h3>
+                <p class="card-desc">Constructing robust backends and microservices with Java, Spring Boot, Node.js, and RESTful APIs.</p>
             </div>
 
             <div class="glass-card reveal" style="transition-delay: 0.3s;">
-                <div class="card-icon">🎨</div>
-                <h3 class="card-title">Creative Motion & UI</h3>
-                <p class="card-desc">Transforming static concepts into smooth, high-fps interactive animations with fluid parallax physics.</p>
+                <div class="card-icon">🚀</div>
+                <h3 class="card-title">Interactive Motion</h3>
+                <p class="card-desc">Creating rich visual feedback with hardware-accelerated animations, dynamic lighting, and particle physics.</p>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
     <section class="section-padding" id="projects">
-        <div class="section-title-wrapper reveal">
+        <div class="section-header reveal">
             <span class="section-tag">Portfolio</span>
-            <h2 class="section-heading">Featured Works</h2>
+            <h2 class="section-title">Featured Demos</h2>
         </div>
 
         <div class="projects-grid">
             <div class="project-card reveal">
                 <div class="project-img-container">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Project 1">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="System Architecture Dashboard">
                 </div>
                 <div class="project-body">
-                    <h3 class="project-title">Analytics Platform</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem;">Real-time interactive dashboard featuring dynamic charts and automated data ingestion.</p>
+                    <h3 class="project-title">Cloud Infrastructure Suite</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">High-throughput cloud monitoring dashboard built for real-time telemetry.</p>
                     <div class="project-tags">
-                        <span class="tag-pill">Next.js</span>
+                        <span class="tag-pill">React</span>
                         <span class="tag-pill">TypeScript</span>
-                        <span class="tag-pill">Tailwind</span>
+                        <span class="tag-pill">Spring Boot</span>
                     </div>
                 </div>
             </div>
 
             <div class="project-card reveal" style="transition-delay: 0.15s;">
                 <div class="project-img-container">
-                    <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80" alt="Project 2">
+                    <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80" alt="Full Stack Application">
                 </div>
                 <div class="project-body">
-                    <h3 class="project-title">E-Commerce Engine</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem;">High-converting shopping experience with dynamic payment gateway integrations.</p>
+                    <h3 class="project-title">Scalable Commerce Hub</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Full-stack e-commerce architecture with microservice order processing.</p>
                     <div class="project-tags">
-                        <span class="tag-pill">React</span>
+                        <span class="tag-pill">Next.js</span>
                         <span class="tag-pill">Node.js</span>
                         <span class="tag-pill">MongoDB</span>
                     </div>
@@ -749,17 +811,17 @@
         </div>
     </section>
 
-    <!-- Footer / Contact -->
+    <!-- Footer & Contact -->
     <footer id="contact">
         <div class="footer-content">
             <div>
-                <h2 class="footer-heading">Let's Build Something Great Together</h2>
-                <p style="color: rgba(255,255,255,0.6); margin-top: 10px;">Available for full-time roles and high-impact engineering projects.</p>
+                <h2 class="footer-heading">Let's Build Something Impactful</h2>
+                <p style="color: var(--text-muted); margin-top: 10px;">Reach out for full-stack engineering, workshops, or collaborations.</p>
             </div>
-            <a href="mailto:contact@hasindu.dev" class="cta-btn">Get In Touch ➔</a>
+            <a href="mailto:azeez@developer.com" class="cta-btn">Contact Abdul Azeez ➔</a>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Hasindu Chanuka. All rights reserved.</p>
+            <p>&copy; 2026 Abdul Azeez. All rights reserved.</p>
         </div>
     </footer>
 
@@ -767,22 +829,22 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            /* 1. ANIMATED CURSOR SCRIPT */
+            /* 1. DYNAMIC CURSOR */
             const dot = document.getElementById('cursor-dot');
-            const follower = document.getElementById('cursor-follower');
+            const outline = document.getElementById('cursor-outline');
 
             window.addEventListener('mousemove', (e) => {
                 dot.style.left = `${e.clientX}px`;
                 dot.style.top = `${e.clientY}px`;
 
-                follower.animate({
+                outline.animate({
                     left: `${e.clientX}px`,
                     top: `${e.clientY}px`
                 }, { duration: 400, fill: "forwards" });
             });
 
-            /* 2. INTERACTIVE PARTICLE BG CANVAS */
-            const canvas = document.getElementById('interactive-bg-canvas');
+            /* 2. BACKGROUND CANVAS PARTICLES */
+            const canvas = document.getElementById('particle-canvas');
             const ctx = canvas.getContext('2d');
 
             let width = canvas.width = window.innerWidth;
@@ -793,14 +855,14 @@
                 height = canvas.height = window.innerHeight;
             });
 
-            class FloatingParticle {
+            class Particle {
                 constructor() {
                     this.x = Math.random() * width;
                     this.y = Math.random() * height;
-                    this.size = Math.random() * 3 + 1;
-                    this.speedX = (Math.random() - 0.5) * 0.8;
-                    this.speedY = (Math.random() - 0.5) * 0.8;
-                    this.alpha = Math.random() * 0.5 + 0.2;
+                    this.size = Math.random() * 2 + 1;
+                    this.speedX = (Math.random() - 0.5) * 0.6;
+                    this.speedY = (Math.random() - 0.5) * 0.6;
+                    this.color = Math.random() > 0.5 ? '#06b6d4' : '#3b82f6';
                 }
 
                 update() {
@@ -814,24 +876,24 @@
                 }
 
                 draw() {
-                    ctx.fillStyle = `rgba(138, 43, 226, ${this.alpha})`;
+                    ctx.fillStyle = this.color;
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                     ctx.fill();
                 }
             }
 
-            const particleArray = Array.from({ length: 45 }, () => new FloatingParticle());
+            const particles = Array.from({ length: 50 }, () => new Particle());
 
-            function animateParticles() {
+            function animate() {
                 ctx.clearRect(0, 0, width, height);
-                particleArray.forEach(p => {
+                particles.forEach(p => {
                     p.update();
                     p.draw();
                 });
-                requestAnimationFrame(animateParticles);
+                requestAnimationFrame(animate);
             }
-            animateParticles();
+            animate();
 
             /* 3. SCROLL REVEAL OBSERVER */
             const observer = new IntersectionObserver((entries) => {
