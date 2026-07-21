@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 💻 Mohamed Arafan Abdul Azeez | Full Stack Developer</title>
+    <title>Mohamed Arafan | Full Stack Developer</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Tab Favicon -->
+    <link rel="icon" href="https://fav.farm/💻" />
     <style>
-        /* --- CSS VARIABLES --- */
         :root {
-            --bg-color: #0f172a;
-            --surface-color: #1e293b;
-            --primary-color: #3b82f6;
-            --primary-hover: #2563eb;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: #334155:
+            --bg-color: #ffffff;
+            --surface-color: #f8fafc;
+            --primary-color: #9333ea; /* Purple theme */
+            --primary-hover: #7e22ce;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
             --transition: all 0.3s ease;
         }
 
-        /* --- RESET & BASE STYLES --- */
         * {
             margin: 0;
             padding: 0;
@@ -25,48 +27,22 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg-color);
-            color: var(--text-main);
+            color: var(--text-dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        a {
-            text-decoration: none;
-            color: var(--text-main);
-        }
-
-        ul {
-            list-style: none;
-        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-        }
-
-        h1, h2, h3 {
-            font-weight: 700;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--text-main);
-        }
-
-        .section-title span {
-            color: var(--primary-color);
-        }
-
-        section {
-            padding: 100px 0;
         }
 
         /* --- NAVIGATION BAR --- */
@@ -74,7 +50,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background-color: rgba(15, 23, 42, 0.95);
+            background-color: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
             z-index: 1000;
@@ -84,15 +60,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 70px;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
+            height: 80px;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.8rem;
+            font-weight: 800;
             color: var(--primary-color);
         }
 
@@ -102,143 +75,175 @@
         }
 
         .nav-links a {
-            font-weight: 500;
+            font-weight: 600;
             transition: var(--transition);
         }
 
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
+        .nav-links a:hover { color: var(--primary-color); }
 
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            font-size: 1.5rem;
-        }
-
-        /* --- HERO SECTION --- */
+        /* --- HERO SECTION WITH BIG NAME ANIMATION --- */
         #hero {
-            height: 100vh;
+            position: relative;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: left;
-            padding-top: 70px;
+            padding-top: 80px;
+            background: radial-gradient(circle at 50% 50%, rgba(147, 51, 234, 0.15) 0%, rgba(255,255,255,1) 70%);
+            overflow: hidden;
         }
 
-        .hero-content {
-            max-width: 800px;
+        /* Massive Background Animated Text */
+        .hero-bg-text {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(4rem, 15vw, 14rem);
+            font-weight: 900;
+            color: rgba(30, 41, 59, 0.85);
+            white-space: nowrap;
+            z-index: 1;
+            user-select: none;
+            letter-spacing: 15px;
+            animation: pulseText 4s ease-in-out infinite alternate;
         }
 
-        .hero-greeting {
+        @keyframes pulseText {
+            0% { transform: translate(-50%, -50%) scale(0.98); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(1.02); opacity: 1; }
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-left {
+            max-width: 500px;
+            z-index: 3;
+        }
+
+        .greeting {
             color: var(--primary-color);
             font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            display: block;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
-        .hero-title {
-            font-size: 4rem;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-        }
-
-        .hero-subtitle {
+        .subtitle {
             font-size: 2rem;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 10px 0 20px 0;
+            height: 40px;
         }
 
-        .hero-desc {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin-bottom: 2.5rem;
+        .hero-right {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            z-index: 2;
+        }
+
+        .profile-img {
+            max-width: 480px;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 20px 30px rgba(147, 51, 234, 0.3));
+            animation: floatImg 6s ease-in-out infinite;
+        }
+
+        @keyframes floatImg {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Buttons & Socials */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
 
         .btn {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            border-radius: 5px;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
             font-weight: 600;
             transition: var(--transition);
-            cursor: pointer;
+            display: inline-block;
         }
 
         .btn-primary {
             background-color: var(--primary-color);
-            color: #fff;
-            border: 2px solid var(--primary-color);
+            color: white;
+            box-shadow: 0 10px 20px rgba(147, 51, 234, 0.3);
         }
 
         .btn-primary:hover {
             background-color: var(--primary-hover);
-            border-color: var(--primary-hover);
+            transform: translateY(-2px);
         }
 
-        .btn-outline {
-            background-color: transparent;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-            margin-left: 1rem;
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 2rem;
+            font-size: 1.5rem;
         }
 
-        .btn-outline:hover {
-            background-color: rgba(59, 130, 246, 0.1);
+        .social-links a {
+            color: var(--text-dark);
+            transition: var(--transition);
         }
 
-        /* --- ABOUT SECTION --- */
-        #about .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
+        .social-links a:hover { color: var(--primary-color); }
 
-        .about-text p {
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .about-image {
-            background-color: var(--surface-color);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 2rem;
+        /* --- SECTIONS COMMON --- */
+        section { padding: 100px 0; }
+        .section-title {
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            font-weight: 800;
         }
+        .section-title span { color: var(--primary-color); }
 
-        /* --- SKILLS SECTION --- */
+        /* --- SKILLS GRID --- */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 1.5rem;
         }
 
         .skill-card {
-            background-color: var(--surface-color);
+            background: white;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
             padding: 1.5rem;
+            border-radius: 15px;
             text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
             transition: var(--transition);
         }
 
         .skill-card:hover {
             transform: translateY(-5px);
             border-color: var(--primary-color);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 25px rgba(147, 51, 234, 0.15);
         }
 
         .skill-card h3 {
-            font-size: 1.1rem;
-            color: var(--text-main);
+            font-size: 1rem;
+            margin-top: 0.8rem;
         }
 
-        /* --- PROJECTS SECTION --- */
+        /* --- PROJECTS --- */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -246,183 +251,76 @@
         }
 
         .project-card {
-            background-color: var(--surface-color);
+            background: white;
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            overflow: hidden;
+            border-radius: 15px;
+            padding: 2rem;
             transition: var(--transition);
-            display: flex;
-            flex-direction: column;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         }
 
         .project-card:hover {
             transform: translateY(-5px);
             border-color: var(--primary-color);
+            box-shadow: 0 10px 25px rgba(147, 51, 234, 0.15);
         }
 
-        .project-content {
-            padding: 2rem;
-            flex-grow: 1;
-        }
-
-        .project-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-desc {
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            font-size: 1rem;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .project-tech span {
-            background-color: rgba(59, 130, 246, 0.1);
-            color: var(--primary-color);
-            padding: 0.2rem 0.6rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        /* --- CONTACT SECTION --- */
-        #contact {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        #contact p {
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            text-align: left;
-        }
-
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 1rem;
-            border-radius: 5px;
-            border: 1px solid var(--border-color);
-            background-color: var(--surface-color);
-            color: var(--text-main);
-            font-family: inherit;
-        }
-
-        .contact-form input:focus, .contact-form textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-        .contact-form textarea {
-            resize: vertical;
-            height: 150px;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* --- RESPONSIVE DESIGN --- */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero-container {
                 flex-direction: column;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background-color: var(--surface-color);
-                padding: 2rem;
                 text-align: center;
-                border-bottom: 1px solid var(--border-color);
             }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .hamburger {
-                display: block;
-            }
-
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.5rem;
-            }
-
-            #about .about-content {
-                grid-template-columns: 1fr;
-            }
+            .hero-left { margin-bottom: 2rem; }
+            .btn-group, .social-links { justify-content: center; }
+            .hero-bg-text { font-size: 5rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header & Navigation -->
+    <!-- Header -->
     <header>
-        <nav>
-            <a href="#" class="logo">ABDUL AZEEZ AR8</a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="hamburger">☰</div>
-        </nav>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Arafan</a>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <!-- Hero Section -->
     <section id="hero">
-        <div class="container hero-content">
-            <span class="hero-greeting">Hi, my name is</span>
-            <h1 class="hero-title">Mohamed Arafan Abdul Azeez.</h1>
-            <h2 class="hero-subtitle">I build things for the web.</h2>
-            <p class="hero-desc">
-                I'm a Software Engineering Undergraduate at SLIIT and a Full Stack Developer. I specialize in building exceptional digital experiences using modern technologies like React and Spring Boot.
-            </p>
-            <a href="#projects" class="btn btn-primary">Check out my work</a>
-            <a href="#contact" class="btn btn-outline">Get in touch</a>
-        </div>
-    </section>
+        <!-- Giant background text matching Hasindu's design -->
+        <div class="hero-bg-text">ARAFAN</div>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <h2 class="section-title">About <span>Me</span></h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Hello! My name is Mohamed Arafan Abdul Azeez. My interest in software engineering started when I realized the power of writing code to solve real-world problems.</p>
-                    <p>Currently, I am an undergraduate at the Sri Lanka Institute of Information Technology (SLIIT), honing my skills as a Full Stack Developer. I enjoy bridging the gap between engineering and design, combining my technical knowledge with a keen eye for aesthetics to create beautiful, scalable, and efficient applications.</p>
-                    <p>When I'm not at my computer, I'm highly interested in Football Management Systems and exploring new ways technology can improve sports analytics and team operations.</p>
+        <div class="container hero-container">
+            <div class="hero-left">
+                <span class="greeting">Hello! I Am</span>
+                <h1 style="font-size: 3.5rem; line-height: 1.1; margin-top: 5px;">Mohamed Arafan</h1>
+                <div class="subtitle"><span id="typing"></span></div>
+                <p style="color: var(--text-muted); font-size: 1.1rem;">Software Engineering Undergraduate at SLIIT passionate about building scalable web applications and football analytics software.</p>
+                
+                <div class="btn-group">
+                    <a href="#contact" class="btn btn-primary">Hire Me</a>
+                    <a href="#projects" class="btn" style="border: 2px solid var(--primary-color); color: var(--primary-color);">My Work</a>
                 </div>
-                <div class="about-image">
-                    <img src="https://avatars.githubusercontent.com/azeez6789" alt="Mohamed Arafan" style="width: 200px; border-radius: 50%; border: 4px solid var(--primary-color); margin-bottom: 1rem;">
-                    <h3>Mohamed Arafan</h3>
-                    <p style="color: var(--primary-color);">Software Engineer</p>
+
+                <div class="social-links">
+                    <a href="https://github.com/azeez6789" target="_blank"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://linkedin.com" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="mailto:your-email@gmail.com"><i class="fa-solid fa-envelope"></i></a>
                 </div>
+            </div>
+
+            <div class="hero-right">
+                <!-- Replace 'profile.png' with your picture path if different -->
+                <img src="profile.png" alt="Mohamed Arafan" class="profile-img" onerror="this.src='https://avatars.githubusercontent.com/azeez6789'">
             </div>
         </div>
     </section>
@@ -432,15 +330,14 @@
         <div class="container">
             <h2 class="section-title">My <span>Tech Stack</span></h2>
             <div class="skills-grid">
-                <div class="skill-card"><h3>Java</h3></div>
-                <div class="skill-card"><h3>Spring Boot</h3></div>
-                <div class="skill-card"><h3>React.js</h3></div>
-                <div class="skill-card"><h3>JavaScript</h3></div>
-                <div class="skill-card"><h3>HTML & CSS</h3></div>
-                <div class="skill-card"><h3>Tailwind CSS</h3></div>
-                <div class="skill-card"><h3>MySQL</h3></div>
-                <div class="skill-card"><h3>PostgreSQL</h3></div>
-                <div class="skill-card"><h3>Git & GitHub</h3></div>
+                <div class="skill-card"><i class="fa-brands fa-java fa-3x" style="color: #f89820;"></i><h3>Java</h3></div>
+                <div class="skill-card"><i class="fa-solid fa-leaf fa-3x" style="color: #6db33f;"></i><h3>Spring Boot</h3></div>
+                <div class="skill-card"><i class="fa-brands fa-react fa-3x" style="color: #61dafb;"></i><h3>React.js</h3></div>
+                <div class="skill-card"><i class="fa-brands fa-js fa-3x" style="color: #f7df1e;"></i><h3>JavaScript</h3></div>
+                <div class="skill-card"><i class="fa-brands fa-html5 fa-3x" style="color: #e34f26;"></i><h3>HTML & CSS</h3></div>
+                <div class="skill-card"><i class="fa-solid fa-code fa-3x" style="color: #38b2ac;"></i><h3>Tailwind CSS</h3></div>
+                <div class="skill-card"><i class="fa-solid fa-database fa-3x" style="color: #00758f;"></i><h3>MySQL</h3></div>
+                <div class="skill-card"><i class="fa-brands fa-git-alt fa-3x" style="color: #f05032;"></i><h3>Git & GitHub</h3></div>
             </div>
         </div>
     </section>
@@ -448,90 +345,63 @@
     <!-- Projects Section -->
     <section id="projects">
         <div class="container">
-            <h2 class="section-title">Some Things I've <span>Built</span></h2>
+            <h2 class="section-title">Featured <span>Projects</span></h2>
             <div class="projects-grid">
-                <!-- Project 1 -->
                 <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">Smart Campus Portal</h3>
-                        <p class="project-desc">A comprehensive university management system designed to handle student records, course enrollments, and faculty scheduling efficiently.</p>
-                        <div class="project-tech">
-                            <span>Java</span>
-                            <span>Spring Boot</span>
-                            <span>MySQL</span>
-                        </div>
-                        <a href="https://github.com/azeez6789/SPRINGBOOT-SMARTCAMPUS" target="_blank" class="btn btn-outline" style="margin-left: 0; padding: 0.5rem 1rem;">View Code</a>
-                    </div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Smart Campus Portal</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem;">University management system built with Spring Boot and MySQL.</p>
+                    <a href="https://github.com/azeez6789/SPRINGBOOT-SMARTCAMPUS" target="_blank" style="color: var(--primary-color); font-weight: 700;">View on GitHub →</a>
                 </div>
-                <!-- Project 2 -->
                 <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">Football Management System</h3>
-                        <p class="project-desc">A passion project aimed at tracking player statistics, managing team rosters, and simulating tournament brackets.</p>
-                        <div class="project-tech">
-                            <span>React</span>
-                            <span>Node.js</span>
-                            <span>Tailwind CSS</span>
-                        </div>
-                        <a href="#" class="btn btn-outline" style="margin-left: 0; padding: 0.5rem 1rem;">Coming Soon</a>
-                    </div>
-                </div>
-                <!-- Project 3 -->
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">PAF Architecture Demo</h3>
-                        <p class="project-desc">A backend-focused project demonstrating scalable architecture patterns using Spring Boot for modern web applications.</p>
-                        <div class="project-tech">
-                            <span>Spring Boot</span>
-                            <span>REST APIs</span>
-                            <span>PostgreSQL</span>
-                        </div>
-                        <a href="https://github.com/azeez6789/SPRINGBOOT-PAF" target="_blank" class="btn btn-outline" style="margin-left: 0; padding: 0.5rem 1rem;">View Code</a>
-                    </div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">PAF Architecture Demo</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem;">Backend microservices setup demonstrating REST APIs.</p>
+                    <a href="https://github.com/azeez6789/SPRINGBOOT-PAF" target="_blank" style="color: var(--primary-color); font-weight: 700;">View on GitHub →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" style="background-color: var(--surface-color);">
-        <div class="container">
-            <h2 class="section-title">Get In <span>Touch</span></h2>
-            <p>I am currently looking for new opportunities and internships. Whether you have a question or just want to say hi, my inbox is always open!</p>
-            
-            <form class="contact-form" onsubmit="event.preventDefault(); alert('This is a demo form. Connect a backend like Formspree to make it work!');">
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <textarea placeholder="Your Message" required></textarea>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
-            </form>
-        </div>
-    </section>
-
     <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Mohamed Arafan Abdul Azeez. Built with HTML, CSS, and ❤️</p>
-        </div>
+    <footer style="text-align: center; padding: 2rem; border-top: 1px solid var(--border-color); color: var(--text-muted);">
+        <p>&copy; 2026 Mohamed Arafan. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript for Mobile Menu -->
+    <!-- Typing Effect JavaScript -->
     <script>
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        const links = document.querySelectorAll('.nav-links li a');
+        const words = ["Full Stack Developer", "Software Engineer", "SLIIT Undergraduate"];
+        let i = 0, timer;
 
-        // Toggle mobile menu
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
+        function typingEffect() {
+            let word = words[i].split("");
+            var loopTyping = function() {
+                if (word.length > 0) {
+                    document.getElementById('typing').innerHTML += word.shift();
+                } else {
+                    setTimeout(deletingEffect, 2000);
+                    return false;
+                }
+                timer = setTimeout(loopTyping, 100);
+            };
+            loopTyping();
+        }
 
-        // Close mobile menu when a link is clicked
-        links.forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
-        });
+        function deletingEffect() {
+            let word = words[i].split("");
+            var loopDeleting = function() {
+                if (word.length > 0) {
+                    word.pop();
+                    document.getElementById('typing').innerHTML = word.join("");
+                } else {
+                    if (words.length > (i + 1)) { i++; } else { i = 0; }
+                    typingEffect();
+                    return false;
+                }
+                timer = setTimeout(loopDeleting, 50);
+            };
+            loopDeleting();
+        }
+
+        typingEffect();
     </script>
 </body>
 </html>
