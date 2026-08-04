@@ -3,25 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABDUL AZEEZ  | Full Stack Developer & Systems Architect</title>
+    <title>Abdul Azeez | Full Stack Software Engineer & Systems Architect</title>
     <style>
         /* ==========================================================================
            1. DESIGN SYSTEM & ROOT VARIABLES
            ========================================================================== */
         :root {
-            --bg-primary: #0a0e17;
-            --bg-secondary: #111827;
-            --bg-card: rgba(255, 255, 255, 0.03);
-            --text-light: #f3f4f6;
-            --text-muted: #9ca3af;
-            --accent-blue: #3b82f6;
+            --bg-primary: #080d16;
+            --bg-secondary: #0f172a;
+            --bg-card: rgba(15, 23, 42, 0.65);
+            --bg-glass: rgba(255, 255, 255, 0.03);
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
             --accent-cyan: #06b6d4;
-            --accent-indigo: #6366f1;
-            --glow-blue: rgba(59, 130, 246, 0.35);
-            --glow-cyan: rgba(6, 182, 212, 0.25);
+            --accent-blue: #3b82f6;
+            --accent-pink: #ec4899;
+            --accent-purple: #8b5cf6;
+            --glow-cyan: rgba(6, 182, 212, 0.4);
+            --glow-blue: rgba(59, 130, 246, 0.4);
+            --glow-pink: rgba(236, 72, 153, 0.4);
             --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-highlight: rgba(6, 182, 212, 0.3);
             --font-main: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             --transition-bounce: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
@@ -44,10 +48,25 @@
             min-height: 100vh;
         }
 
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-subtle);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-cyan);
+        }
+
         /* ==========================================================================
-           2. CUSTOM DYNAMIC CURSOR
+           2. ADVANCED INTERACTIVE DYNAMIC CURSOR
            ========================================================================== */
-        .cursor-dot, .cursor-outline {
+        .cursor-dot, .cursor-ring {
             pointer-events: none;
             position: fixed;
             top: 0;
@@ -62,24 +81,30 @@
             width: 8px;
             height: 8px;
             background-color: var(--accent-cyan);
-            box-shadow: 0 0 10px var(--accent-cyan);
+            box-shadow: 0 0 12px var(--accent-cyan);
         }
 
-        .cursor-outline {
-            width: 42px;
-            height: 42px;
-            border: 2px solid var(--accent-blue);
-            transition: transform 0.15s ease-out;
-            animation: pulseCursor 2s infinite ease-in-out;
+        .cursor-ring {
+            width: 44px;
+            height: 44px;
+            border: 1.5px solid var(--accent-blue);
+            transition: transform 0.12s ease-out;
+            animation: ringPulse 3s infinite ease-in-out;
         }
 
-        @keyframes pulseCursor {
+        @keyframes ringPulse {
             0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 15px var(--glow-blue); }
-            50% { transform: translate(-50%, -50%) scale(1.3); box-shadow: 0 0 30px var(--glow-cyan); }
+            50% { transform: translate(-50%, -50%) scale(1.25); box-shadow: 0 0 30px var(--glow-cyan); }
+        }
+
+        .cursor-hover {
+            transform: translate(-50%, -50%) scale(1.8) !important;
+            border-color: var(--accent-pink) !important;
+            background: rgba(236, 72, 153, 0.1);
         }
 
         /* ==========================================================================
-           3. BACKGROUND ATMOSPHERE & CANVAS PARTICLES
+           3. BACKGROUND PARTICLES & AMBIENT ATMOSPHERE
            ========================================================================== */
         #particle-canvas {
             position: fixed;
@@ -102,45 +127,45 @@
         .glow-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.45;
-            animation: floatOrb 18s infinite ease-in-out alternate;
+            filter: blur(140px);
+            opacity: 0.35;
+            animation: floatOrb 20s infinite ease-in-out alternate;
         }
 
         .orb-1 {
-            top: -10%;
-            left: 30%;
-            width: 600px;
-            height: 600px;
+            top: -15%;
+            left: 20%;
+            width: 650px;
+            height: 650px;
             background: radial-gradient(circle, var(--accent-blue) 0%, transparent 70%);
         }
 
         .orb-2 {
-            bottom: 5%;
+            bottom: -10%;
             right: -10%;
-            width: 700px;
-            height: 700px;
+            width: 750px;
+            height: 750px;
             background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 70%);
-            animation-delay: -6s;
+            animation-delay: -7s;
         }
 
         .orb-3 {
-            top: 40%;
+            top: 45%;
             left: -15%;
-            width: 550px;
-            height: 550px;
-            background: radial-gradient(circle, var(--accent-indigo) 0%, transparent 70%);
-            animation-delay: -12s;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-pink) 0%, transparent 70%);
+            animation-delay: -14s;
         }
 
         @keyframes floatOrb {
             0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            50% { transform: translate(80px, 50px) scale(1.15) rotate(180deg); }
-            100% { transform: translate(-50px, 90px) scale(0.9) rotate(360deg); }
+            50% { transform: translate(90px, 60px) scale(1.2) rotate(180deg); }
+            100% { transform: translate(-60px, 100px) scale(0.85) rotate(360deg); }
         }
 
         /* ==========================================================================
-           4. NAVIGATION BAR
+           4. NAVIGATION BAR (WITH ABDUL AZEEZ LOGO)
            ========================================================================== */
         header {
             position: fixed;
@@ -153,8 +178,15 @@
             justify-content: space-between;
             align-items: center;
             backdrop-filter: blur(16px);
-            background: rgba(10, 14, 23, 0.75);
+            background: rgba(8, 13, 22, 0.75);
             border-bottom: 1px solid var(--border-subtle);
+            transition: var(--transition-smooth);
+        }
+
+        header.scrolled {
+            padding: 15px 8%;
+            background: rgba(8, 13, 22, 0.95);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .brand-logo {
@@ -165,22 +197,41 @@
             letter-spacing: -0.5px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
-        .brand-logo span {
-            color: var(--accent-cyan);
+        .logo-box {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: #fff;
+            box-shadow: 0 0 15px var(--glow-cyan);
+            animation: logoGlow 4s infinite ease-in-out alternate;
         }
 
-        .code-icon {
-            color: var(--accent-blue);
-            font-weight: bold;
+        @keyframes logoGlow {
+            0% { box-shadow: 0 0 15px var(--glow-cyan); }
+            100% { box-shadow: 0 0 25px var(--glow-pink); }
+        }
+
+        .brand-logo-text {
+            background: linear-gradient(90deg, #ffffff, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
         }
 
         nav ul {
             display: flex;
             list-style: none;
             gap: 35px;
+            align-items: center;
         }
 
         nav a {
@@ -189,7 +240,7 @@
             font-weight: 600;
             font-size: 0.95rem;
             position: relative;
-            padding: 5px 0;
+            padding: 6px 0;
             transition: var(--transition-smooth);
         }
 
@@ -200,7 +251,7 @@
             left: 0;
             width: 0%;
             height: 2px;
-            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-pink));
             transition: var(--transition-smooth);
         }
 
@@ -213,22 +264,22 @@
         }
 
         .nav-btn {
-            padding: 10px 22px;
+            padding: 10px 24px;
             border-radius: 30px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
             color: #fff !important;
-            font-weight: 600;
-            box-shadow: 0 4px 15px var(--glow-blue);
+            font-weight: 700;
+            box-shadow: 0 4px 15px var(--glow-cyan);
             transition: var(--transition-bounce) !important;
         }
 
         .nav-btn:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 8px 25px var(--glow-blue);
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 8px 25px var(--glow-cyan);
         }
 
         /* ==========================================================================
-           5. HERO SECTION (CUSTOMIZED FRONT-IMAGE CUTOUT LAYOUT)
+           5. HERO SECTION (INTERACTIVE CUTOUT PROFILE LAYOUT)
            ========================================================================== */
         .hero-section {
             position: relative;
@@ -241,15 +292,15 @@
             overflow: hidden;
         }
 
-        /* Oversized Layered Background Text */
+        /* Giant Background Name Text */
         .giant-back-text {
             position: absolute;
-            top: 50%;
+            top: 52%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: clamp(3.8rem, 11vw, 12rem);
+            font-size: clamp(3.5rem, 11vw, 11.5rem);
             font-weight: 900;
-            color: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.04);
             white-space: nowrap;
             letter-spacing: -2px;
             z-index: 1;
@@ -264,10 +315,9 @@
 
         @keyframes textFloat {
             0% { transform: translate(-50%, -50%) translateY(0px); }
-            100% { transform: translate(-50%, -50%) translateY(-18px); }
+            100% { transform: translate(-50%, -50%) translateY(-20px); }
         }
 
-        /* Left Greetings */
         .hero-text-left {
             position: absolute;
             left: 8%;
@@ -276,7 +326,7 @@
         }
 
         .hero-greeting {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 800;
             color: var(--accent-cyan);
             letter-spacing: 3px;
@@ -288,10 +338,10 @@
         .hero-subtitle {
             font-size: 1rem;
             color: var(--text-muted);
-            max-width: 250px;
+            max-width: 260px;
+            line-height: 1.5;
         }
 
-        /* Bottom Left Role */
         .hero-text-bottom-left {
             position: absolute;
             left: 8%;
@@ -302,21 +352,21 @@
         .hero-role {
             font-size: 2.2rem;
             font-weight: 800;
-            background: linear-gradient(90deg, #ffffff, var(--accent-cyan));
+            background: linear-gradient(90deg, #ffffff, var(--accent-cyan), var(--accent-pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Center Image Frame Layer */
+        /* Center Profile Cutout Container */
         .profile-container {
             position: relative;
-            z-index: 2; /* In front of giant text */
+            z-index: 2;
             display: flex;
             justify-content: center;
             align-items: flex-end;
             height: 75vh;
             max-height: 680px;
-            margin-top: 50px;
+            margin-top: 40px;
         }
 
         .profile-wrapper {
@@ -332,7 +382,7 @@
             width: auto;
             max-width: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 20px 40px rgba(6, 182, 212, 0.3));
+            filter: drop-shadow(0 20px 40px rgba(6, 182, 212, 0.35));
             transition: var(--transition-smooth);
             transform-origin: bottom center;
             animation: floatProfile 6s ease-in-out infinite alternate;
@@ -340,19 +390,19 @@
 
         .profile-wrapper:hover .profile-cutout-img {
             transform: scale(1.03) translateY(-10px);
-            filter: drop-shadow(0 30px 60px rgba(59, 130, 246, 0.5));
+            filter: drop-shadow(0 30px 60px rgba(59, 130, 246, 0.55));
         }
 
         @keyframes floatProfile {
             0% { transform: translateY(0px); }
-            100% { transform: translateY(-12px); }
+            100% { transform: translateY(-15px); }
         }
 
-        /* Floating Social Cards */
+        /* Floating Social Buttons */
         .floating-socials {
             position: absolute;
             right: 8%;
-            top: 40%;
+            top: 38%;
             display: flex;
             flex-direction: column;
             gap: 18px;
@@ -365,7 +415,7 @@
             border-radius: 16px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border-subtle);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             display: flex;
             align-items: center;
@@ -378,33 +428,33 @@
         }
 
         .social-btn:hover {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-pink));
             color: #fff;
             transform: scale(1.15) rotate(6deg);
-            box-shadow: 0 15px 30px var(--glow-blue);
+            box-shadow: 0 15px 30px var(--glow-pink);
         }
 
         /* Floating Info Badge */
         .floating-badge {
             position: absolute;
             right: 8%;
-            bottom: 20%;
+            bottom: 18%;
             z-index: 4;
             padding: 16px 24px;
             border-radius: 20px;
-            background: rgba(17, 24, 39, 0.85);
+            background: rgba(15, 23, 42, 0.85);
             border: 1px solid var(--border-subtle);
             backdrop-filter: blur(12px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             animation: bounceBadge 4s infinite ease-in-out alternate;
         }
 
         @keyframes bounceBadge {
             0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
+            100% { transform: translateY(-12px); }
         }
 
         .badge-dot {
@@ -416,7 +466,7 @@
         }
 
         /* ==========================================================================
-           6. ABOUT & SKILLS SECTION
+           6. SECTION LAYOUT & CARDS
            ========================================================================== */
         .section-padding {
             padding: 120px 10%;
@@ -434,7 +484,7 @@
             padding: 6px 18px;
             background: rgba(6, 182, 212, 0.1);
             color: var(--accent-cyan);
-            border: 1px solid rgba(6, 182, 212, 0.2);
+            border: 1px solid rgba(6, 182, 212, 0.25);
             border-radius: 30px;
             font-weight: 700;
             font-size: 0.85rem;
@@ -449,43 +499,45 @@
             color: var(--text-light);
         }
 
-        .about-grid {
+        /* 3D Tilt Card Base Grid */
+        .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 35px;
+            perspective: 1000px;
         }
 
-        .glass-card {
+        .tilt-card {
             background: var(--bg-card);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(16px);
             border: 1px solid var(--border-subtle);
             border-radius: 24px;
             padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            transition: var(--transition-smooth);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: transform 0.1s linear, border-color 0.4s ease, box-shadow 0.4s ease;
+            transform-style: preserve-3d;
             position: relative;
             overflow: hidden;
         }
 
-        .glass-card::before {
+        .tilt-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 3px;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-pink));
             opacity: 0;
             transition: var(--transition-smooth);
         }
 
-        .glass-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(6, 182, 212, 0.3);
-            box-shadow: 0 30px 60px rgba(6, 182, 212, 0.15);
+        .tilt-card:hover {
+            border-color: var(--border-highlight);
+            box-shadow: 0 30px 60px rgba(6, 182, 212, 0.2);
         }
 
-        .glass-card:hover::before {
+        .tilt-card:hover::before {
             opacity: 1;
         }
 
@@ -493,92 +545,78 @@
             font-size: 2.5rem;
             margin-bottom: 20px;
             display: inline-block;
+            transform: translateZ(30px);
         }
 
         .card-title {
-            font-size: 1.3rem;
+            font-size: 1.35rem;
             font-weight: 700;
             margin-bottom: 12px;
             color: var(--text-light);
+            transform: translateZ(20px);
         }
 
         .card-desc {
             color: var(--text-muted);
             line-height: 1.7;
             font-size: 0.98rem;
+            transform: translateZ(10px);
         }
 
         /* ==========================================================================
-           7. FEATURED PROJECTS SHOWCASE
+           7. INTERACTIVE DEMO & PROJECTS SECTION
            ========================================================================== */
-        .projects-grid {
+        .demo-showcase-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 35px;
-        }
-
-        .project-card {
-            border-radius: 24px;
-            overflow: hidden;
-            background: var(--bg-secondary);
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.4);
             border: 1px solid var(--border-subtle);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            transition: var(--transition-smooth);
+            border-radius: 30px;
+            padding: 50px;
+            backdrop-filter: blur(16px);
+        }
+
+        .demo-preview-card {
             position: relative;
-        }
-
-        .project-img-container {
-            width: 100%;
-            height: 230px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .project-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .project-card:hover img {
-            transform: scale(1.1) rotate(1deg);
-        }
-
-        .project-body {
-            padding: 30px;
-        }
-
-        .project-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text-light);
-        }
-
-        .project-tags {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-top: 15px;
-        }
-
-        .tag-pill {
-            padding: 4px 12px;
-            background: rgba(59, 130, 246, 0.15);
-            color: var(--accent-cyan);
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(236, 72, 153, 0.1));
+            border: 1px solid var(--border-highlight);
             border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            padding: 40px;
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+
+        .interactive-glow-box {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-pink));
+            border-radius: 24px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 30px var(--glow-cyan);
+            animation: pulseBox 3s infinite ease-in-out alternate;
+        }
+
+        @keyframes pulseBox {
+            0% { transform: scale(1) rotate(0deg); border-radius: 24px; }
+            50% { transform: scale(1.1) rotate(90deg); border-radius: 50px; }
+            100% { transform: scale(1) rotate(180deg); border-radius: 24px; }
         }
 
         /* ==========================================================================
-           8. ANIMATION REVEAL CLASSES
+           8. ANIMATION REVEAL ENGINE
            ========================================================================== */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .reveal.active {
@@ -587,7 +625,7 @@
         }
 
         /* ==========================================================================
-           9. FOOTER
+           9. FOOTER SECTION
            ========================================================================== */
         footer {
             background: var(--bg-secondary);
@@ -615,19 +653,19 @@
 
         .cta-btn {
             padding: 16px 36px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
             color: #fff;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 700;
             transition: var(--transition-bounce);
             display: inline-block;
-            box-shadow: 0 10px 25px var(--glow-blue);
+            box-shadow: 0 10px 25px var(--glow-cyan);
         }
 
         .cta-btn:hover {
             transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 40px var(--glow-blue);
+            box-shadow: 0 20px 40px var(--glow-cyan);
         }
 
         .footer-bottom {
@@ -653,14 +691,14 @@
                 justify-content: center;
             }
             .giant-back-text {
-                font-size: 14vw;
+                font-size: 13vw;
             }
             .floating-socials {
                 position: relative;
                 right: auto;
                 top: auto;
                 flex-direction: row;
-                margin-top: 20px;
+                margin-top: 25px;
             }
             .floating-badge {
                 position: relative;
@@ -671,16 +709,19 @@
             .profile-container {
                 height: 50vh;
             }
+            .demo-showcase-container {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Interactive Cursor -->
+    <!-- Interactive Neon Custom Cursor -->
     <div class="cursor-dot" id="cursor-dot"></div>
-    <div class="cursor-outline" id="cursor-outline"></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
 
-    <!-- Background Particles & Ambient Glowing Orbs -->
+    <!-- Animated Particle Canvas & Ambient Glows -->
     <canvas id="particle-canvas"></canvas>
     <div class="ambient-glow-container">
         <div class="glow-orb orb-1"></div>
@@ -688,162 +729,186 @@
         <div class="glow-orb orb-3"></div>
     </div>
 
-    <!-- Header Navigation -->
-    <header>
-        <a href="#" class="brand-logo"><span class="code-icon">&lt;/&gt;</span> Abdul Azeez<span>.dev</span></a>
+    <!-- Header Navigation (Name: Abdul Azeez) -->
+    <header id="main-header">
+        <a href="#" class="brand-logo">
+            <div class="logo-box">A</div>
+            <span class="brand-logo-text">Abdul Azeez</span>
+        </a>
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact" class="nav-btn">Contact Me</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact" class="nav-btn">Get In Touch</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Main Hero Section -->
+    <!-- Hero Section -->
     <section class="hero-section" id="home">
         
-        <!-- Left Greeting Text -->
+        <!-- Left Greeting -->
         <div class="hero-text-left">
-            <h2 class="hero-greeting">HELLO! I AM</h2>
-            <p class="hero-subtitle">Software Engineering Undergraduate & Full Stack Developer</p>
+            <h2 class="hero-greeting">WELCOME! I AM</h2>
+            <p class="hero-subtitle">Software Engineering Specialist & Full Stack Web Architect</p>
         </div>
 
-        <!-- Oversized Background Typography -->
+        <!-- Giant Background Typography -->
         <h1 class="giant-back-text">Abdul Azeez</h1>
 
-        <!-- Profile Cutout Frame (In Front of Giant Text) -->
+        <!-- Profile Center Cutout Picture Container -->
         <div class="profile-container">
             <div class="profile-wrapper">
-                <!-- Uses your profile picture 'profile.png' -->
-                <img src="profile.png" alt="Abdul Azeez Profile Photo" class="profile-cutout-img">
+                <img src="profile.png" alt="Abdul Azeez Profile" class="profile-cutout-img">
             </div>
         </div>
 
-        <!-- Bottom Left Role Text -->
+        <!-- Bottom Left Role -->
         <div class="hero-text-bottom-left">
-            <h3 class="hero-role">Full Stack Dev</h3>
+            <h3 class="hero-role">Interactive Engineer</h3>
         </div>
 
-        <!-- Floating Side Social Links -->
+        <!-- Floating Social Buttons -->
         <div class="floating-socials">
             <a href="#" class="social-btn" title="GitHub">Git</a>
             <a href="#" class="social-btn" title="LinkedIn">in</a>
             <a href="#" class="social-btn" title="Twitter">X</a>
         </div>
 
-        <!-- Floating Badge -->
+        <!-- Floating Info Badge -->
         <div class="floating-badge">
             <span class="badge-dot"></span>
             <div>
-                <strong style="display:block; font-size: 0.85rem; color: #fff;">Open for Collaboration</strong>
+                <strong style="display:block; font-size: 0.85rem; color: #fff;">Status: Active</strong>
                 <span style="font-size:0.75rem; color: var(--text-muted);">Available for Projects</span>
             </div>
         </div>
     </section>
 
-    <!-- About & Expertise Section -->
+    <!-- About & Engineering Capabilities -->
     <section class="section-padding" id="about">
         <div class="section-header reveal">
-            <span class="section-tag">About Me</span>
-            <h2 class="section-title">Building Scalable Web Solutions</h2>
+            <span class="section-tag">Core Specialization</span>
+            <h2 class="section-title">Designed For Maximum Performance</h2>
         </div>
 
-        <div class="about-grid">
-            <div class="glass-card reveal">
+        <div class="cards-grid">
+            <div class="tilt-card reveal">
                 <div class="card-icon">⚡</div>
-                <h3 class="card-title">Frontend Engineering</h3>
-                <p class="card-desc">Specialized in modern web interfaces using React, TypeScript, Next.js, and interactive CSS layout systems.</p>
+                <h3 class="card-title">Frontend Mastery</h3>
+                <p class="card-desc">Constructing fast, accessible user interfaces using Modern JavaScript, React, and GPU-accelerated CSS animations.</p>
             </div>
 
-            <div class="glass-card reveal" style="transition-delay: 0.15s;">
-                <div class="card-icon">⚙️</div>
-                <h3 class="card-title">Systems Architecture</h3>
-                <p class="card-desc">Constructing robust backends and microservices with Java, Spring Boot, Node.js, and RESTful APIs.</p>
+            <div class="tilt-card reveal" style="transition-delay: 0.15s;">
+                <div class="card-icon">🛡️</div>
+                <h3 class="card-title">Backend Architecture</h3>
+                <p class="card-desc">Designing scalable REST APIs and microservice architecture with node-level security and performance tuning.</p>
             </div>
 
-            <div class="glass-card reveal" style="transition-delay: 0.3s;">
-                <div class="card-icon">🚀</div>
-                <h3 class="card-title">Interactive Motion</h3>
-                <p class="card-desc">Creating rich visual feedback with hardware-accelerated animations, dynamic lighting, and particle physics.</p>
+            <div class="tilt-card reveal" style="transition-delay: 0.3s;">
+                <div class="card-icon">🎨</div>
+                <h3 class="card-title">Motion Physics</h3>
+                <p class="card-desc">Bringing static layouts to life using fluid canvas rendering, responsive light refraction, and interactive mouse parallax.</p>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section class="section-padding" id="projects">
+    <!-- Interactive Showcase Section -->
+    <section class="section-padding" id="features">
         <div class="section-header reveal">
-            <span class="section-tag">Portfolio</span>
-            <h2 class="section-title">Featured Demos</h2>
+            <span class="section-tag">Interactive Engine</span>
+            <h2 class="section-title">Visual Dynamics Experience</h2>
         </div>
 
-        <div class="projects-grid">
-            <div class="project-card reveal">
-                <div class="project-img-container">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="System Architecture Dashboard">
-                </div>
-                <div class="project-body">
-                    <h3 class="project-title">Cloud Infrastructure Suite</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem;">High-throughput cloud monitoring dashboard built for real-time telemetry.</p>
-                    <div class="project-tags">
-                        <span class="tag-pill">React</span>
-                        <span class="tag-pill">TypeScript</span>
-                        <span class="tag-pill">Spring Boot</span>
-                    </div>
-                </div>
+        <div class="demo-showcase-container reveal">
+            <div>
+                <h3 style="font-size: 1.8rem; margin-bottom: 15px;">Real-Time Interactive Lighting</h3>
+                <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 25px;">
+                    This interface uses dynamic mouse-position calculations to drive ambient highlights, 3D card tilt transformations, and smooth particle drift animations simultaneously at 60 FPS.
+                </p>
+                <a href="#contact" class="cta-btn">Test Features ➔</a>
             </div>
 
-            <div class="project-card reveal" style="transition-delay: 0.15s;">
-                <div class="project-img-container">
-                    <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80" alt="Full Stack Application">
-                </div>
-                <div class="project-body">
-                    <h3 class="project-title">Scalable Commerce Hub</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem;">Full-stack e-commerce architecture with microservice order processing.</p>
-                    <div class="project-tags">
-                        <span class="tag-pill">Next.js</span>
-                        <span class="tag-pill">Node.js</span>
-                        <span class="tag-pill">MongoDB</span>
-                    </div>
-                </div>
+            <div class="demo-preview-card">
+                <div class="interactive-glow-box"></div>
+                <h4 style="font-size: 1.2rem; color: #fff;">Fluid Engine Active</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">Move your mouse over the screen to trigger lighting effects.</p>
             </div>
         </div>
     </section>
 
-    <!-- Footer & Contact -->
+    <!-- Footer Section -->
     <footer id="contact">
         <div class="footer-content">
             <div>
-                <h2 class="footer-heading">Let's Build Something Impactful</h2>
-                <p style="color: var(--text-muted); margin-top: 10px;">Reach out for full-stack engineering, workshops, or collaborations.</p>
+                <h2 class="footer-heading">Let's Work Together</h2>
+                <p style="color: var(--text-muted); margin-top: 10px;">Reach out for full-stack engineering, web design, or consultations.</p>
             </div>
-            <a href="mailto:azeez@developer.com" class="cta-btn">Contact Abdul Azeez ➔</a>
+            <a href="mailto:azeez@example.com" class="cta-btn">Contact Abdul Azeez ➔</a>
         </div>
         <div class="footer-bottom">
             <p>&copy; 2026 Abdul Azeez. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Interactive JavaScript Engine -->
+    <!-- Interactive Animation & Control Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            /* 1. DYNAMIC CURSOR */
+            /* 1. DYNAMIC CURSOR ENGINE WITH TRAILING RING */
             const dot = document.getElementById('cursor-dot');
-            const outline = document.getElementById('cursor-outline');
+            const ring = document.getElementById('cursor-ring');
 
             window.addEventListener('mousemove', (e) => {
                 dot.style.left = `${e.clientX}px`;
                 dot.style.top = `${e.clientY}px`;
 
-                outline.animate({
+                ring.animate({
                     left: `${e.clientX}px`,
                     top: `${e.clientY}px`
-                }, { duration: 400, fill: "forwards" });
+                }, { duration: 350, fill: "forwards" });
             });
 
-            /* 2. BACKGROUND CANVAS PARTICLES */
+            // Hover effects on interactive elements
+            document.querySelectorAll('a, button, .tilt-card').forEach(el => {
+                el.addEventListener('mouseenter', () => ring.classList.add('cursor-hover'));
+                el.addEventListener('mouseleave', () => ring.classList.remove('cursor-hover'));
+            });
+
+            /* 2. HEADER SCROLL EFFECT */
+            const header = document.getElementById('main-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            /* 3. 3D TILT CARD MOUSE PARALLAX EFFECT */
+            const tiltCards = document.querySelectorAll('.tilt-card');
+            tiltCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = (y - centerY) / 12;
+                    const rotateY = (centerX - x) / 12;
+
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                });
+            });
+
+            /* 4. CANVAS PARTICLE BACKGROUND ENGINE */
             const canvas = document.getElementById('particle-canvas');
             const ctx = canvas.getContext('2d');
 
@@ -857,46 +922,53 @@
 
             class Particle {
                 constructor() {
+                    this.reset();
+                }
+
+                reset() {
                     this.x = Math.random() * width;
                     this.y = Math.random() * height;
                     this.size = Math.random() * 2 + 1;
-                    this.speedX = (Math.random() - 0.5) * 0.6;
-                    this.speedY = (Math.random() - 0.5) * 0.6;
-                    this.color = Math.random() > 0.5 ? '#06b6d4' : '#3b82f6';
+                    this.speedX = (Math.random() - 0.5) * 0.5;
+                    this.speedY = (Math.random() - 0.5) * 0.5;
+                    this.color = Math.random() > 0.5 ? '#06b6d4' : '#ec4899';
+                    this.alpha = Math.random() * 0.6 + 0.2;
                 }
 
                 update() {
                     this.x += this.speedX;
                     this.y += this.speedY;
 
-                    if (this.x < 0) this.x = width;
-                    if (this.x > width) this.x = 0;
-                    if (this.y < 0) this.y = height;
-                    if (this.y > height) this.y = 0;
+                    if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+                        this.reset();
+                    }
                 }
 
                 draw() {
+                    ctx.save();
+                    ctx.globalAlpha = this.alpha;
                     ctx.fillStyle = this.color;
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                     ctx.fill();
+                    ctx.restore();
                 }
             }
 
-            const particles = Array.from({ length: 50 }, () => new Particle());
+            const particles = Array.from({ length: 60 }, () => new Particle());
 
-            function animate() {
+            function renderParticles() {
                 ctx.clearRect(0, 0, width, height);
                 particles.forEach(p => {
                     p.update();
                     p.draw();
                 });
-                requestAnimationFrame(animate);
+                requestAnimationFrame(renderParticles);
             }
-            animate();
+            renderParticles();
 
-            /* 3. SCROLL REVEAL OBSERVER */
-            const observer = new IntersectionObserver((entries) => {
+            /* 5. INTERSECTION OBSERVER FOR SCROLL REVEAL */
+            const revealObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
@@ -904,7 +976,7 @@
                 });
             }, { threshold: 0.15 });
 
-            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
         });
     </script>
 </body>
