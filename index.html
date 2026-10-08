@@ -1443,14 +1443,6 @@
             object-fit:
                 contain;
 
-            border: 4px solid var(--cyan);
-
-            border-radius: 25px;
-
-            box-shadow:
-                0 0 20px var(--cyan-glow),
-                0 0 45px var(--blue-glow);
-
             filter:
                 drop-shadow(
                     0 30px 50px rgba(0,245,255,.22)
@@ -2565,8 +2557,6 @@
 
 
         .project-card:hover
-        .project-overlay,
-        .project-card:focus-within
         .project-overlay {
 
             opacity:
@@ -2609,8 +2599,6 @@
 
 
         .project-card:hover
-        .project-link,
-        .project-card:focus-within
         .project-link {
 
             transform:
@@ -3596,6 +3584,27 @@
             }
         }
 
+        .hero-image {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+
+    border: 4px solid var(--cyan);
+    border-radius: 25px;
+
+    box-shadow:
+        0 0 20px var(--cyan-glow),
+        0 0 45px var(--blue-glow);
+
+    filter:
+        drop-shadow(
+            0 30px 50px rgba(0,245,255,.22)
+        );
+
+    animation:
+        profileFloat 5s ease-in-out infinite alternate;
+}
+
 
         @media(max-width:768px) {
 
@@ -4086,9 +4095,8 @@
 
                     <div class="hero-socials">
 
-                        <a href="https://github.com/azeez6789"
+                        <a href="https://github.com/"
                            target="_blank"
-                           rel="noopener noreferrer"
                            aria-label="GitHub">
 
                             <i class="fa-brands fa-github"></i>
@@ -4096,9 +4104,8 @@
                         </a>
 
 
-                        <a href="https://www.linkedin.com/in/abdul-azeez-65a1a8413/?isSelfProfile=true"
+                        <a href="https://linkedin.com/"
                            target="_blank"
-                           rel="noopener noreferrer"
                            aria-label="LinkedIn">
 
                             <i class="fa-brands fa-linkedin-in"></i>
@@ -4106,10 +4113,18 @@
                         </a>
 
 
-                        <a href="mailto:azeezar20021015@gmail.com"
+                        <a href="#"
                            aria-label="Email">
 
                             <i class="fa-solid fa-envelope"></i>
+
+                        </a>
+
+
+                        <a href="#"
+                           aria-label="Instagram">
+
+                            <i class="fa-brands fa-instagram"></i>
 
                         </a>
 
@@ -4685,116 +4700,116 @@
                 </div>
 
 
-                <div class="skill-card reveal">
+                    <div class="skill-card reveal">
 
-                    <div class="skill-icon">
+                        <div class="skill-icon">
 
-                        <i class="fa-brands fa-react" aria-hidden="true"></i>
+                            <i class="fa-brands fa-react" aria-hidden="true"></i>
 
-                    </div>
+                        </div>
 
-                    <h3>
-                        React Native
-                    </h3>
+                        <h3>
+                            React Native
+                        </h3>
 
-                    <p>
-                        Building cross-platform mobile interfaces
-                        with reusable React components.
-                    </p>
+                        <p>
+                            Building cross-platform mobile interfaces
+                            with reusable React components.
+                        </p>
 
-                    <div class="skill-percent">
+                        <div class="skill-percent">
 
-                        <span>
-                            Mobile Development
-                        </span>
+                            <span>
+                                Mobile Development
+                            </span>
 
-                    </div>
-
-                </div>
-
-
-                <div class="skill-card reveal">
-
-                    <div class="skill-icon">
-
-                        <i class="fa-solid fa-code" aria-hidden="true"></i>
+                        </div>
 
                     </div>
 
-                    <h3>
-                        Kotlin
-                    </h3>
 
-                    <p>
-                        Developing concise, type-safe applications
-                        for the Kotlin ecosystem.
-                    </p>
+                    <div class="skill-card reveal">
 
-                    <div class="skill-percent">
+                        <div class="skill-icon">
 
-                        <span>
-                            Programming Language
-                        </span>
+                            <i class="fa-solid fa-code" aria-hidden="true"></i>
 
-                    </div>
+                        </div>
 
-                </div>
+                        <h3>
+                            Kotlin
+                        </h3>
 
+                        <p>
+                            Developing concise, type-safe applications
+                            for the Kotlin ecosystem.
+                        </p>
 
-                <div class="skill-card reveal">
+                        <div class="skill-percent">
 
-                    <div class="skill-icon">
+                            <span>
+                                Programming Language
+                            </span>
 
-                        <i class="fa-brands fa-php" aria-hidden="true"></i>
-
-                    </div>
-
-                    <h3>
-                        PHP
-                    </h3>
-
-                    <p>
-                        Server-side scripting and dynamic
-                        web application development.
-                    </p>
-
-                    <div class="skill-percent">
-
-                        <span>
-                            Backend Development
-                        </span>
+                        </div>
 
                     </div>
 
-                </div>
 
+                    <div class="skill-card reveal">
 
-                <div class="skill-card reveal">
+                        <div class="skill-icon">
 
-                    <div class="skill-icon">
+                            <i class="fa-brands fa-php" aria-hidden="true"></i>
 
-                        <i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i>
+                        </div>
+
+                        <h3>
+                            PHP
+                        </h3>
+
+                        <p>
+                            Server-side scripting and dynamic
+                            web application development.
+                        </p>
+
+                        <div class="skill-percent">
+
+                            <span>
+                                Backend Development
+                            </span>
+
+                        </div>
 
                     </div>
 
-                    <h3>
-                        Flutter
-                    </h3>
 
-                    <p>
-                        Creating cross-platform mobile applications
-                        with a shared codebase.
-                    </p>
+                    <div class="skill-card reveal">
 
-                    <div class="skill-percent">
+                        <div class="skill-icon">
 
-                        <span>
-                            Mobile Development
-                        </span>
+                            <i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i>
+
+                        </div>
+
+                        <h3>
+                            Flutter
+                        </h3>
+
+                        <p>
+                            Creating cross-platform mobile applications
+                            with a shared codebase.
+                        </p>
+
+                        <div class="skill-percent">
+
+                            <span>
+                                Mobile Development
+                            </span>
+
+                        </div>
 
                     </div>
-
-                </div>
 
             </div>
 
@@ -5218,6 +5233,13 @@
                 </button>
 
                 <button class="filter-btn"
+                        data-filter="data">
+
+                    Data
+
+                </button>
+
+                <button class="filter-btn"
                         data-filter="mobile">
 
                     Mobile
@@ -5247,14 +5269,10 @@
 
                         <div class="project-overlay">
 
-                            <a href="https://github.com/SadisaRashmika/UniHelp-ITPM-Project.git"
-                               target="_blank"
-                               rel="noopener noreferrer"
-                               class="project-link"
-                               aria-label="View UniHelp System on GitHub"
-                               title="View on GitHub">
+                            <a href="#"
+                               class="project-link">
 
-                                <i class="fa-brands fa-github"></i>
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
 
                             </a>
 
@@ -5315,14 +5333,10 @@
 
                         <div class="project-overlay">
 
-                            <a href="https://github.com/azeez6789/PAF-MODULE-3-1SEM-WEB-SPRINGBOOT.git"
-                               target="_blank"
-                               rel="noopener noreferrer"
-                               class="project-link"
-                               aria-label="View Smart Campus System on GitHub"
-                               title="View on GitHub">
+                            <a href="#"
+                               class="project-link">
 
-                                <i class="fa-brands fa-github"></i>
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
 
                             </a>
 
@@ -5382,14 +5396,10 @@
 
                         <div class="project-overlay">
 
-                            <a href="https://github.com/azeez6789/springboot-footbal-web.git"
-                               target="_blank"
-                               rel="noopener noreferrer"
-                               class="project-link"
-                               aria-label="View SLIIT Football on GitHub"
-                               title="View on GitHub">
+                            <a href="#"
+                               class="project-link">
 
-                                <i class="fa-brands fa-github"></i>
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
 
                             </a>
 
@@ -5437,6 +5447,127 @@
                 <article class="project-card reveal"
                          data-category="mobile">
 
+                    <div class="project-image guidely-preview">
+
+                        <img class="guidely-image"
+                             src="assets/guidely-home.png"
+                             alt="Guidely healthcare consultation app home screen">
+
+                        <img class="guidely-image"
+                             src="assets/guidely-welcome.png"
+                             alt="Guidely consultation app welcome screen">
+
+                        <div class="project-overlay">
+
+                            <a href="#"
+                               class="project-link">
+
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="project-content">
+
+                        <h3>
+                            Guidely Healthcare App
+                        </h3>
+
+                        <p>
+
+                            A mobile healthcare consultation app that
+                            helps users find and access medical advice
+                            through a simple, guided experience. Built
+                            with Kotlin, SQLite and Android Studio.
+
+                        </p>
+
+                        <div class="project-tags">
+
+                            <span class="project-tag">
+                                Kotlin
+                            </span>
+
+                            <span class="project-tag">
+                                SQLite
+                            </span>
+
+                            <span class="project-tag">
+                                Android Studio
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PROJECT 05 -->
+
+                <article class="project-card reveal"
+                         data-category="web">
+
+                    <div class="project-image">
+
+                        <i class="fa-solid fa-utensils"></i>
+
+                        <div class="project-overlay">
+
+                            <a href="#"
+                               class="project-link">
+
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="project-content">
+
+                        <h3>
+                            Recipe Discovery App
+                        </h3>
+
+                        <p>
+
+                            A local recipe and cuisine
+                            discovery concept focused on
+                            cultural information and usability.
+
+                        </p>
+
+                        <div class="project-tags">
+
+                            <span class="project-tag">
+                                UI/UX
+                            </span>
+
+                            <span class="project-tag">
+                                Figma
+                            </span>
+
+                            <span class="project-tag">
+                                Research
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PROJECT 06 -->
+
+                <article class="project-card reveal"
+                         data-category="mobile">
+
                     <div class="project-image foodmobile-preview">
 
                         <img class="foodmobile-image"
@@ -5445,14 +5576,10 @@
 
                         <div class="project-overlay">
 
-                            <a href="https://github.com/D0017/foodbank-mobile.git"
-                               target="_blank"
-                               rel="noopener noreferrer"
-                               class="project-link"
-                               aria-label="View FoodMobile Bank on GitHub"
-                               title="View on GitHub">
+                            <a href="#"
+                               class="project-link">
 
-                                <i class="fa-brands fa-github"></i>
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
 
                             </a>
 
@@ -5501,10 +5628,66 @@
                 </article>
 
 
-                <!-- PROJECT 05 -->
+                <!-- PROJECT 07 -->
 
                 <article class="project-card reveal"
-                         data-category="web">
+                         data-category="java">
+
+                    <div class="project-image">
+
+                        <i class="fa-solid fa-futbol"></i>
+
+                        <div class="project-overlay">
+
+                            <a href="https://github.com/azeez6789/springboot-footbal-web.git"
+                               target="_blank"
+                               class="project-link">
+
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="project-content">
+
+                        <h3>
+                            Spring Boot Football App
+                        </h3>
+
+                        <p>
+
+                            A football application built using Spring Boot.
+
+                        </p>
+
+                        <div class="project-tags">
+
+                            <span class="project-tag">
+                                Java
+                            </span>
+
+                            <span class="project-tag">
+                                Spring Boot
+                            </span>
+
+                            <span class="project-tag">
+                                Web
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PROJECT 08 -->
+
+                <article class="project-card reveal"
+                         data-category="java">
 
                     <div class="project-image has-image-preview">
 
@@ -5518,14 +5701,11 @@
 
                         <div class="project-overlay">
 
-                            <a href="https://github.com/azeez6789/MERN-3-1-SEM-IT-Module-web.git"
+                            <a href="https://github.com/Amiz001/parking-management-system.git"
                                target="_blank"
-                               rel="noopener noreferrer"
-                               class="project-link"
-                               aria-label="View Parking Management System on GitHub"
-                               title="View on GitHub">
+                               class="project-link">
 
-                                <i class="fa-brands fa-github"></i>
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
 
                             </a>
 
@@ -5548,7 +5728,7 @@
                         <div class="project-tags">
 
                             <span class="project-tag">
-                                MERN Stack
+                                Java
                             </span>
 
                             <span class="project-tag">
@@ -5561,6 +5741,113 @@
 
                 </article>
 
+
+                <!-- PROJECT 09 -->
+
+                <article class="project-card reveal"
+                         data-category="web">
+
+                    <div class="project-image">
+
+                        <i class="fa-solid fa-graduation-cap"></i>
+
+                        <div class="project-overlay">
+
+                            <a href="https://github.com/SadisaRashmika/UniHelp-ITPM-Project.git"
+                               target="_blank"
+                               class="project-link">
+
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="project-content">
+
+                        <h3>
+                            UniHelp ITPM Project
+                        </h3>
+
+                        <p>
+
+                            University help and resource management platform developed as part of ITPM.
+
+                        </p>
+
+                        <div class="project-tags">
+
+                            <span class="project-tag">
+                                IT
+                            </span>
+
+                            <span class="project-tag">
+                                Project Management
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PROJECT 10 -->
+
+                <article class="project-card reveal"
+                         data-category="web">
+
+                    <div class="project-image">
+
+                        <i class="fa-solid fa-school"></i>
+
+                        <div class="project-overlay">
+
+                            <a href="https://github.com/SadisaRashmika/it3030-paf-2026-smart-campus-group77.git"
+                               target="_blank"
+                               class="project-link">
+
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="project-content">
+
+                        <h3>
+                            Smart Campus System
+                        </h3>
+
+                        <p>
+
+                            A comprehensive Smart Campus system for group 77, enhancing university operations.
+
+                        </p>
+
+                        <div class="project-tags">
+
+                            <span class="project-tag">
+                                Smart Campus
+                            </span>
+
+                            <span class="project-tag">
+                                Web
+                            </span>
+
+                            <span class="project-tag">
+                                PAF
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
 
             </div>
 
